@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPost } from "@/lib/blog";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 
 interface Props {
   params: { slug: string };
@@ -63,6 +64,7 @@ export default function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <BreadcrumbJsonLd items={[{ name: "Insights", href: "/blog" }, { name: post.title, href: `/blog/${post.slug}` }]} />
 
       <article className="mx-auto max-w-3xl px-6 py-16">
         <header className="mb-10">

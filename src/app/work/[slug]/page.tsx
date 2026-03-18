@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/work";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 
 interface Props {
   params: { slug: string };
@@ -63,6 +64,7 @@ export default function CaseStudyPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <BreadcrumbJsonLd items={[{ name: "Our Work", href: "/work" }, { name: cs.title, href: `/work/${cs.slug}` }]} />
 
       {/* Hero */}
       <section className="bg-brand-navy text-white py-14">

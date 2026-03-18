@@ -46,6 +46,40 @@ export const metadata: Metadata = {
   }),
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  name: "Bess Damm",
+  url: "https://bessdamm.com",
+  logo: "https://bessdamm.com/logo.png",
+  description:
+    "London-based SEO and programming agency. Technical SEO, web development, and bespoke SEO tooling for London businesses.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "London",
+    addressCountry: "GB",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "London",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "hello@bessdamm.com",
+    url: "https://bessdamm.com/contact",
+  },
+  sameAs: [],
+  knowsAbout: [
+    "Technical SEO",
+    "Core Web Vitals",
+    "Web Development",
+    "Next.js",
+    "Google Analytics",
+    "Search Engine Optimisation",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -54,6 +88,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-white text-gray-900 antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Nav />
         <main>{children}</main>
         <Footer />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqSection } from "@/components/FaqSection";
 import { Testimonials } from "@/components/Testimonials";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 
 const testimonial = [
   {
@@ -132,6 +133,7 @@ export default function WebDevelopmentPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <BreadcrumbJsonLd items={[{ name: "Services", href: "/services" }, { name: "Web Development", href: "/services/web-development" }]} />
 
       {/* Hero */}
       <section className="bg-brand-navy text-white">
