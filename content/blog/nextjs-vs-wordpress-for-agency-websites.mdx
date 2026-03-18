@@ -1,0 +1,72 @@
+---
+title: "Next.js vs WordPress for Agency Websites"
+description: "Should your agency website run on WordPress or Next.js? We compare performance, SEO, developer experience, and total cost of ownership to help you decide."
+datePublished: "2026-03-17"
+author: "Bess Damm"
+---
+
+WordPress powers around 43% of the web, and Next.js has become the default choice for engineering-led teams. Both can produce excellent agency websites — but they optimise for very different things.
+
+## Performance out of the box
+
+**Next.js** generates static HTML at build time (or incrementally) and serves it from a global CDN. With `next/image`, `next/font`, and the App Router's streaming, hitting 95+ Lighthouse scores is routine.
+
+**WordPress** serves PHP-rendered HTML from a single origin server by default. Without aggressive caching (WP Rocket, Cloudflare), a stock WordPress site rarely passes Core Web Vitals. It can be fast — it just requires deliberate configuration to get there.
+
+**Winner for performance:** Next.js, with significantly less effort.
+
+## SEO capabilities
+
+Both platforms support the fundamentals: custom titles, meta descriptions, canonical tags, XML sitemaps, and structured data. The differences are in the details:
+
+| Capability | Next.js | WordPress |
+|---|---|---|
+| Server-rendered HTML | ✅ Built-in | ✅ Built-in |
+| Streaming metadata | ✅ App Router | ❌ |
+| Image optimisation | ✅ `next/image` | Requires plugin |
+| RSS / sitemaps | ✅ Route handlers | ✅ Yoast / AIOSEO |
+| Schema markup | Code or lib | Plugin (Yoast) |
+
+**Winner for SEO:** A draw for most sites. Next.js has an edge on performance-driven signals.
+
+## Content management
+
+This is where WordPress wins for non-technical editors. The block editor (Gutenberg) is mature, well-documented, and familiar to most marketing teams. Plugins for forms, landing pages, and e-commerce are abundant.
+
+Next.js does not include a CMS. You pair it with a headless option — Contentful, Sanity, Payload, or even MDX files in a Git repo. These are excellent systems, but they add complexity and cost.
+
+**Winner for content management:** WordPress, for non-developer editors.
+
+## Developer experience
+
+If your team is comfortable with React and TypeScript, Next.js is a joy. You get a proper component model, type safety, ESLint integration, and the full npm ecosystem.
+
+WordPress development means PHP, `functions.php`, hook/filter architecture, and theme development patterns that feel dated compared to modern frontend tooling.
+
+**Winner for DX:** Next.js.
+
+## Security and maintenance
+
+WordPress's popularity makes it a target. Plugins introduce vulnerabilities regularly. You need to stay on top of updates, and shared hosting compounds the risk.
+
+A static Next.js site deployed to Vercel has almost no attack surface — there is no server-side application to compromise.
+
+**Winner for security:** Next.js.
+
+## Which should you choose?
+
+**Choose WordPress if:**
+- Non-technical editors will manage content daily without developer help
+- You need a large plugin ecosystem (WooCommerce, advanced forms, membership)
+- Budget for ongoing development is limited
+
+**Choose Next.js if:**
+- Performance and SEO scores are a priority
+- Your team includes developers comfortable with React
+- You want a maintainable, secure codebase you can extend without plugin conflicts
+
+For agency websites specifically — where performance and SEO credibility are table stakes — we build in Next.js by default. It is what we use for our own site.
+
+---
+
+Want a fast, search-optimised Next.js website for your agency? [Get in touch →](/contact)

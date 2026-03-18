@@ -1,0 +1,80 @@
+---
+title: "How to Fix Core Web Vitals in Next.js"
+description: "A practical, developer-focused guide to diagnosing and fixing LCP, INP, and CLS issues in Next.js — with real configuration examples."
+datePublished: "2026-02-24"
+author: "Bess Damm"
+---
+
+Core Web Vitals (CWV) measure real-user experience, and Google uses them as a ranking signal. Next.js gives you excellent defaults, but any project of meaningful size will need deliberate tuning. Here is how to attack each metric.
+
+## Largest Contentful Paint (LCP) — target < 2.5 s
+
+LCP measures how long the biggest visible element takes to render. On most marketing sites this is a hero image or the `<h1>`.
+
+### Priority-hint your hero image
+
+```tsx
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  width={1200}
+  height={630}
+  priority          // sets fetchpriority="high" and disables lazy loading
+/>
+```
+
+### Eliminate render-blocking third-party scripts
+
+Move analytics, chat widgets, and tag managers to `next/script` with `strategy="lazyOnload"` or `strategy="afterInteractive"`. They should never block the first paint.
+
+### Use the App Router streaming layout
+
+The App Router streams HTML in chunks. Keep your layout shell lightweight so the browser can start painting before all data is fetched.
+
+## Interaction to Next Paint (INP) — target < 200 ms
+
+INP replaced First Input Delay in March 2024. It measures the latency of *every* interaction across the session.
+
+### Defer non-critical client-side work
+
+Long tasks (> 50 ms) on the main thread inflate INP. Break them up with `scheduler.yield()` or `setTimeout(..., 0)`.
+
+### Move state out of deeply nested trees
+
+A single `useState` change in a component high up the tree can trigger hundreds of re-renders. Use `React.memo`, stable callback references (`useCallback`), or move state closer to where it is consumed.
+
+### Lazy-load heavy components
+
+```tsx
+const HeavyChart = dynamic(() => import("@/components/HeavyChart"), {
+  loading: () => <Skeleton />,
+});
+```
+
+## Cumulative Layout Shift (CLS) — target < 0.1
+
+CLS penalises content that jumps as the page loads — usually caused by images without dimensions or ads that inject above existing content.
+
+### Always set image dimensions
+
+```tsx
+<Image src="/logo.svg" alt="Logo" width={160} height={40} />
+```
+
+Or use `fill` inside a sized wrapper — never render an `<img>` without explicit dimensions.
+
+### Reserve space for dynamic content
+
+Banner ads, cookie notices, and embeds should load into pre-allocated space (use `min-height` on the container) so they do not push content down.
+
+## Measuring your improvements
+
+- **Chrome DevTools** → Lighthouse for lab data
+- **PageSpeed Insights** for real-user CrUX data per URL
+- **Google Search Console** → Core Web Vitals report for site-wide field data
+
+Fix one metric at a time, measure, then ship. Do not deploy three CWV changes in one release — you will not know what moved the needle.
+
+---
+
+Struggling with Core Web Vitals on your Next.js site? [Talk to us →](/contact)
