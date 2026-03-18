@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqSection } from "@/components/FaqSection";
+import { Testimonials } from "@/components/Testimonials";
+
+const testimonial = [
+  {
+    quote:
+      "Bess Damm became a true extension of our marketing team. They didn't just do SEO — they built us tooling, reported on what actually mattered, and helped us make better product decisions based on search data.",
+    author: "VP Marketing",
+    role: "B2B SaaS Company",
+    company: "London",
+  },
+];
 
 export const metadata: Metadata = {
   title: "SEO Retainer Services London",
@@ -248,6 +259,9 @@ export default function SeoRetainersPage() {
           </p>
         </div>
       </section>
+
+      {/* Testimonial */}
+      <Testimonials testimonials={testimonial} variant="single" />
 
       {/* FAQ */}
       <FaqSection faqs={faqs} />

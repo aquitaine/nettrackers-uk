@@ -1,5 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Testimonials } from "@/components/Testimonials";
+
+const testimonials = [
+  {
+    quote:
+      "Bess Damm rebuilt our technical SEO foundation from the ground up. Organic traffic more than doubled in six months and we now rank for terms our competitors have owned for years.",
+    author: "Head of Growth",
+    role: "Series A FinTech",
+    company: "London",
+  },
+  {
+    quote:
+      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website they built is the best investment we've made in years.",
+    author: "Managing Partner",
+    role: "Boutique Law Firm",
+    company: "London",
+  },
+  {
+    quote:
+      "They didn't just do SEO — they built us tooling, reported on what actually mattered, and helped us make better product decisions based on search data. True extension of our team.",
+    author: "VP Marketing",
+    role: "B2B SaaS",
+    company: "London",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Bess Damm | SEO & Programming Agency London",
@@ -75,6 +100,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials testimonials={testimonials} />
 
       {/* CTA */}
       <section className="py-20">

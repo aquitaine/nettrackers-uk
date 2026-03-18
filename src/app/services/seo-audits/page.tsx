@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqSection } from "@/components/FaqSection";
+import { Testimonials } from "@/components/Testimonials";
+
+const testimonial = [
+  {
+    quote:
+      "The audit report was unlike anything we'd received before — every issue was prioritised by impact, not just listed. We fixed the top 10 items and rankings moved within a month.",
+    author: "Marketing Director",
+    role: "E-commerce Brand",
+    company: "London",
+  },
+];
 
 export const metadata: Metadata = {
   title: "SEO Audit Services London",
@@ -232,6 +243,9 @@ export default function SeoAuditsPage() {
           </div>
         </div>
       </section>
+
+      {/* Testimonial */}
+      <Testimonials testimonials={testimonial} variant="single" />
 
       {/* FAQ */}
       <FaqSection faqs={faqs} />

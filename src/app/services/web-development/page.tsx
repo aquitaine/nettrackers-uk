@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqSection } from "@/components/FaqSection";
+import { Testimonials } from "@/components/Testimonials";
+
+const testimonial = [
+  {
+    quote:
+      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website Bess Damm built is the best investment we've made in years.",
+    author: "Managing Partner",
+    role: "Boutique Law Firm",
+    company: "London",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Web Development Services London",
@@ -239,6 +250,9 @@ export default function WebDevelopmentPage() {
           </p>
         </div>
       </section>
+
+      {/* Testimonial */}
+      <Testimonials testimonials={testimonial} variant="single" />
 
       {/* FAQ */}
       <FaqSection faqs={faqs} />
