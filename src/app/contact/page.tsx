@@ -20,7 +20,7 @@ export default function ContactPage() {
         <ContactForm />
       </ErrorBoundary>
 
-      <p className="mt-8 text-sm text-gray-500 text-center">
+      <p className="mt-8 text-sm text-gray-600 text-center">
         Or email us directly at{" "}
         <a href="mailto:hello@bessdamm.com" className="text-brand-teal hover:underline">
           hello@bessdamm.com

@@ -47,7 +47,7 @@ export default function BlogIndexPage({
               >
                 <time
                   dateTime={post.datePublished}
-                  className="text-xs text-gray-400 font-medium uppercase tracking-wide"
+                  className="text-xs text-gray-600 font-medium uppercase tracking-wide"
                 >
                   {new Date(post.datePublished).toLocaleDateString("en-GB", {
                     day: "numeric",

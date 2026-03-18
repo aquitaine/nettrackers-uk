@@ -70,7 +70,7 @@ export default function BlogPostPage({ params }: Props) {
         <header className="mb-10">
           <time
             dateTime={post.datePublished}
-            className="text-xs text-gray-400 font-medium uppercase tracking-wide"
+            className="text-xs text-gray-600 font-medium uppercase tracking-wide"
           >
             {new Date(post.datePublished).toLocaleDateString("en-GB", {
               day: "numeric",
@@ -82,7 +82,7 @@ export default function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <p className="mt-4 text-lg text-gray-600">{post.description}</p>
-          <p className="mt-2 text-sm text-gray-400">By {post.author}</p>
+          <p className="mt-2 text-sm text-gray-600">By {post.author}</p>
         </header>
 
         <div className="prose prose-gray max-w-none prose-headings:text-brand-navy prose-a:text-brand-teal prose-a:no-underline hover:prose-a:underline prose-code:bg-gray-100 prose-code:rounded prose-code:px-1">

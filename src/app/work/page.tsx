@@ -87,7 +87,7 @@ export default function WorkIndexPage() {
                   <blockquote className="mt-5 border-l-4 border-brand-teal pl-4 text-sm text-gray-600 italic leading-relaxed line-clamp-2 flex-1">
                     &ldquo;{cs.testimonial.quote}&rdquo;
                   </blockquote>
-                  <p className="mt-1 text-xs text-gray-400 pl-4">
+                  <p className="mt-1 text-xs text-gray-600 pl-4">
                     — {cs.testimonial.author}, {cs.testimonial.role}
                   </p>
 

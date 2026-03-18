@@ -107,7 +107,7 @@ export default function CaseStudyPage({ params }: Props) {
             {cs.metrics.map((m) => (
               <div key={m.label} className="text-center">
                 <p className="text-3xl font-extrabold text-brand-teal">{m.value}</p>
-                <p className="mt-1 text-sm text-gray-500">{m.label}</p>
+                <p className="mt-1 text-sm text-gray-600">{m.label}</p>
               </div>
             ))}
           </div>
@@ -143,7 +143,7 @@ export default function CaseStudyPage({ params }: Props) {
             <p className="text-sm font-semibold text-brand-navy">
               Want results like these?
             </p>
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-gray-600">
               Get a free consultation — we&apos;ll come back within one business day.
             </p>
             <Link
@@ -156,7 +156,7 @@ export default function CaseStudyPage({ params }: Props) {
 
           {/* More work */}
           <div className="rounded-2xl bg-white border border-gray-100 p-5">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-3">
               More case studies
             </p>
             <Link

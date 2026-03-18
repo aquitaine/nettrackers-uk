@@ -247,7 +247,7 @@ export default function WebDevelopmentPage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-gray-600 mt-6">
             All projects include design review, SEO setup, and a 30-day post-launch support window.
           </p>
         </div>

@@ -256,7 +256,7 @@ export default function SeoRetainersPage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-gray-600 mt-6">
             Minimum 3-month commitment. Cancel with 30 days notice after that.
           </p>
         </div>

@@ -68,7 +68,7 @@ export function Testimonials({
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-brand-navy">{t.author}</p>
-                  <p className="text-xs text-gray-400">{t.role}, {t.company}</p>
+                  <p className="text-xs text-gray-600">{t.role}, {t.company}</p>
                 </div>
               </figcaption>
             </figure>
