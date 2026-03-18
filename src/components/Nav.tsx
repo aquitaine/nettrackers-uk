@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "/services", label: "Services" },
+  { href: "/work", label: "Our Work" },
   { href: "/blog", label: "Insights" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },

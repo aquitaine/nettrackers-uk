@@ -1,0 +1,81 @@
+---
+title: "Core Web Vitals Fix Lifts E-commerce Revenue +31%"
+description: "A Shopify-based fashion retailer was losing rankings and sales due to poor Core Web Vitals. We diagnosed and fixed the issues — and watched revenue climb."
+client: "Fashion E-commerce Brand"
+industry: "E-commerce / Fashion"
+services:
+  - Core Web Vitals
+  - Technical SEO
+  - Performance Optimisation
+metrics:
+  - label: "Revenue increase"
+    value: "+31%"
+  - label: "LCP improvement"
+    value: "6.1s → 1.8s"
+  - label: "Bounce rate drop"
+    value: "−24%"
+  - label: "Timeframe"
+    value: "10 weeks"
+testimonial:
+  quote: "We knew our site was slow but didn't realise how much it was costing us. After Bess Damm's work, our conversion rate went up noticeably within weeks. The ROI was immediate."
+  author: "Founder"
+  role: "Fashion E-commerce Brand, London"
+datePublished: "2025-05-20"
+---
+
+## The Challenge
+
+A London-based fashion retailer with a Shopify store and 40,000 monthly visitors was seeing rankings slip and a rising bounce rate. Google's Search Console was full of Core Web Vitals failures — particularly on mobile.
+
+Key pre-engagement metrics:
+- LCP: 6.1s (mobile), 3.4s (desktop)
+- INP: 890ms
+- CLS: 0.31
+- Conversion rate: 1.2%
+
+## Diagnosis
+
+We started with a full performance audit across 50 sampled pages using Lighthouse, Chrome DevTools, and real-user data from CrUX.
+
+Root causes identified:
+
+1. **Hero image** (above the fold) was unoptimised — a 2.4MB JPEG loaded without priority hints
+2. **Third-party scripts**: 7 analytics/marketing tags loading synchronously in `<head>`, blocking render for 2.1s
+3. **Liquid render-blocking CSS**: an outdated Shopify theme loading 400KB of unused CSS
+4. **Layout shift**: product image dimensions not declared, causing significant CLS on load
+5. **Largest Contentful Paint element** was a `background-image` (not preloadable by the browser)
+
+## Fixes
+
+### Image Optimisation
+- Converted all hero images to WebP/AVIF with responsive `srcset`
+- Added `fetchpriority="high"` to the LCP element
+- Switched hero from CSS `background-image` to an `<img>` tag for preloadability
+- Declared explicit `width` and `height` on all product images
+
+### Script Loading
+- Moved all non-critical third-party scripts to load after user interaction (`IntersectionObserver` trigger)
+- Consolidated three separate analytics scripts into a single tag manager with async loading
+- Removed two redundant scripts that were no longer in use
+
+### CSS
+- Removed 340KB of unused CSS using PurgeCSS analysis
+- Inlined critical above-the-fold CSS (~8KB) directly in `<head>`
+
+### Shopify Theme
+- Patched layout shift issues by adding `aspect-ratio` CSS to all product image containers
+- Deferred non-critical fonts with `font-display: swap`
+
+## Results
+
+| Metric | Before | After |
+|--------|--------|-------|
+| LCP (mobile) | 6.1s | 1.8s |
+| INP | 890ms | 180ms |
+| CLS | 0.31 | 0.03 |
+| Lighthouse (mobile) | 29 | 91 |
+| Bounce rate | 58% | 44% |
+| Conversion rate | 1.2% | 1.7% |
+| Monthly revenue | Baseline | +31% |
+
+The conversion rate improvement from 1.2% to 1.7% — a 42% relative lift — was the key driver of revenue growth. The changes paid for the engagement within the first month.
