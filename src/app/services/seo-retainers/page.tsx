@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "SEO Retainer Services London",
@@ -37,6 +38,44 @@ const whatIsIncluded = [
   {
     heading: "Algorithm update response",
     body: "When Google updates, we assess impact within 48 hours and adjust strategy before traffic has time to slip.",
+  },
+];
+
+const faqs = [
+  {
+    question: "How quickly will I see results from an SEO retainer?",
+    answer:
+      "Technical fixes and quick wins typically show impact within 4–8 weeks. Meaningful keyword ranking improvements usually appear in 3–6 months. Content-driven growth compounds over 6–12 months. We set realistic expectations at kickoff with a milestone timeline.",
+  },
+  {
+    question: "What is the minimum commitment?",
+    answer:
+      "We ask for a 3-month minimum to give SEO time to work — meaningful results require consistency. After 3 months you can cancel with 30 days notice.",
+  },
+  {
+    question: "Do I need to have done an SEO audit first?",
+    answer:
+      "Not necessarily — all retainers start with a baseline audit in Month 1. If you've already had a recent audit from us, we'll skip straight to strategy.",
+  },
+  {
+    question: "Will you write the content or just brief it?",
+    answer:
+      "It depends on your plan. Essential includes one content brief per month (you write or commission it). Growth includes four fully written briefs. Scale includes unlimited briefs and can include written content. We can always add content writing to any plan.",
+  },
+  {
+    question: "How do you report on progress?",
+    answer:
+      "You receive a weekly rank snapshot and a monthly dashboard report covering organic impressions, clicks, position changes, traffic trends, and conversion attribution. We also do a monthly call to walk through the numbers together.",
+  },
+  {
+    question: "Can I pause or change plans?",
+    answer:
+      "You can upgrade plans with 7 days notice. Pausing is available once per year for up to 4 weeks. We don't offer downgrades mid-contract but will discuss at renewal.",
+  },
+  {
+    question: "Do you work with our in-house team?",
+    answer:
+      "Yes — most clients have internal marketers or developers. We work as an extension of your team: providing strategy, briefs, and technical direction while your team handles execution where it makes sense.",
   },
 ];
 
@@ -209,6 +248,9 @@ export default function SeoRetainersPage() {
           </p>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FaqSection faqs={faqs} />
 
       {/* CTA */}
       <section className="py-20">

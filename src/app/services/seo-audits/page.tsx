@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "SEO Audit Services London",
@@ -37,6 +38,44 @@ const whatIsIncluded = [
   {
     heading: "Prioritised fix list",
     body: "Every finding scored by impact and effort so your team knows what to fix first to move rankings.",
+  },
+];
+
+const faqs = [
+  {
+    question: "How long does an SEO audit take?",
+    answer:
+      "Our turnaround is 5–7 business days from when you grant access. We'll agree a precise deadline at kickoff and hit it. Larger sites (Enterprise tier) may take slightly longer — we'll confirm scope upfront.",
+  },
+  {
+    question: "What access do you need to run the audit?",
+    answer:
+      "Read-only access to Google Search Console and Google Analytics 4 is sufficient for most audits. We may also ask for a staging URL, CMS access, or server logs if specific issues warrant deeper investigation.",
+  },
+  {
+    question: "Do you fix the issues or just report them?",
+    answer:
+      "The SEO Audit is a diagnostic and prioritised fix list — we tell you exactly what to fix and why, scored by impact and effort. If you want us to implement the fixes, we can scope that as a separate project or an ongoing retainer.",
+  },
+  {
+    question: "Can a one-time audit really improve our rankings?",
+    answer:
+      "Yes — particularly if technical issues are holding the site back. We've seen audits unblock significant ranking improvements within weeks (see our case studies). That said, SEO is ongoing: an audit is the best starting point, but a retainer is often needed to sustain gains.",
+  },
+  {
+    question: "What if my site is on WordPress / Shopify / Webflow?",
+    answer:
+      "We audit sites on any platform. Our recommendations will be specific to your CMS — we know which issues are platform-level limitations and which are configurable. Some fixes may require developer involvement on your end.",
+  },
+  {
+    question: "Do you cover local SEO in the audit?",
+    answer:
+      "Yes — if your business has a local presence we include Google Business Profile review, local citation consistency, and LocalBusiness schema as part of the audit.",
+  },
+  {
+    question: "How is this different from a free tool like Ahrefs or Semrush site audit?",
+    answer:
+      "Automated tools flag issues but don't prioritise them, explain their business impact, or tell you what to fix first. Our audits combine automated crawls with manual expert analysis — we interpret the data and give you a clear, ranked action plan, not a 200-item checklist.",
   },
 ];
 
@@ -193,6 +232,9 @@ export default function SeoAuditsPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FaqSection faqs={faqs} />
 
       {/* CTA */}
       <section className="py-20">

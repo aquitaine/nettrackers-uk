@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "Web Development Services London",
@@ -37,6 +38,44 @@ const whatIsIncluded = [
   {
     heading: "Vercel deployment",
     body: "CI/CD on Vercel with preview URLs per PR, rollback in one click, and edge caching globally.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Do you only build with Next.js?",
+    answer:
+      "Next.js is our default for all marketing sites and content-heavy builds. For certain use cases — pure SPAs, internal tools, or clients with existing stacks — we'll use the right tool. We'll always recommend what makes sense for your project, not what's convenient for us.",
+  },
+  {
+    question: "How long does a website project take?",
+    answer:
+      "A landing page takes 2–3 weeks. A brochure site typically 6–10 weeks from signed brief to launch. Web applications vary by complexity — we'll give you a milestone plan before you commit. We don't pad timelines.",
+  },
+  {
+    question: "What's included in the price?",
+    answer:
+      "All projects include design review, responsive build, SEO technical setup (metadata, sitemap, schema, robots.txt), analytics integration, CMS configuration, Vercel deployment, and a 30-day post-launch support window. No surprise costs.",
+  },
+  {
+    question: "Can you redesign our existing site rather than start from scratch?",
+    answer:
+      "Yes — we do both greenfield builds and redesigns/rebuilds of existing sites. If you have content, branding, and a site that works but is slow or outdated, a rebuild is often faster and less risky than starting from zero.",
+  },
+  {
+    question: "Will we be able to update the content ourselves?",
+    answer:
+      "Absolutely. All brochure sites and web apps include a headless CMS (typically Sanity or MDX, depending on complexity) so your team can update pages, blog posts, and structured content without touching code.",
+  },
+  {
+    question: "Do you guarantee Lighthouse scores?",
+    answer:
+      "We target 90+ Lighthouse performance on all projects and include it in our definition of done. If a page doesn't hit that threshold at launch, we fix it before closing the project — no extra charge.",
+  },
+  {
+    question: "Do you provide ongoing support after launch?",
+    answer:
+      "All projects include 30 days of post-launch support for bug fixes and minor content changes. After that, we offer monthly maintenance retainers or can hand the site over to your team with full documentation.",
   },
 ];
 
@@ -200,6 +239,9 @@ export default function WebDevelopmentPage() {
           </p>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FaqSection faqs={faqs} />
 
       {/* CTA */}
       <section className="py-20">
