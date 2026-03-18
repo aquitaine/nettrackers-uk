@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackContactFormSubmit } from "@/lib/analytics";
 
 const SERVICES = ["SEO Audit", "SEO Retainer", "Web Development", "Other"] as const;
 
@@ -30,6 +31,7 @@ export function ContactForm() {
         throw new Error(body.error ?? "Something went wrong");
       }
 
+      trackContactFormSubmit();
       setStatus("success");
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
