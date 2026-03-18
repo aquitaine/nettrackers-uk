@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -15,7 +16,9 @@ export default function ContactPage() {
         Tell us about your project and we&apos;ll come back to you within one business day.
       </p>
 
-      <ContactForm />
+      <ErrorBoundary>
+        <ContactForm />
+      </ErrorBoundary>
 
       <p className="mt-8 text-sm text-gray-500 text-center">
         Or email us directly at{" "}

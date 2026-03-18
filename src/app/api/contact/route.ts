@@ -1,43 +1,75 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { z } from "zod";
 
+// ---------------------------------------------------------------------------
+// Input schema
+// ---------------------------------------------------------------------------
+const SERVICES = ["SEO Audit", "SEO Retainer", "Web Development", "Other"] as const;
+
+const contactSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email().max(200),
+  company: z.string().max(100).optional(),
+  service: z.enum(SERVICES).optional(),
+  message: z.string().min(10).max(5000),
+  _hp: z.string().optional(), // honeypot
+});
+
+// ---------------------------------------------------------------------------
+// Rate limiting (Upstash — no-op when env vars absent)
+// ---------------------------------------------------------------------------
+async function checkRateLimit(ip: string): Promise<boolean> {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return true; // no limiter configured → allow
+
+  const { Ratelimit } = await import("@upstash/ratelimit");
+  const { Redis } = await import("@upstash/redis");
+
+  const rl = new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(5, "1 h"),
+    prefix: "contact",
+  });
+
+  const { success } = await rl.limit(ip);
+  return success;
+}
+
+// ---------------------------------------------------------------------------
+// Route handler
+// ---------------------------------------------------------------------------
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@bessdamm.com";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "noreply@bessdamm.com";
 
-const SERVICES = [
-  "SEO Audit",
-  "SEO Retainer",
-  "Web Development",
-  "Other",
-] as const;
-
 export async function POST(req: NextRequest) {
-  let body: Record<string, string>;
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const allowed = await checkRateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
+  let raw: unknown;
   try {
-    body = await req.json();
+    raw = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const { name, email, company, message, service, _hp } = body;
-
-  // Honeypot check — bots fill the hidden field, humans don't
-  if (_hp) {
-    // Silently accept to avoid training bots
-    return NextResponse.json({ ok: true });
-  }
-
-  // Validate required fields
-  if (
-    typeof name !== "string" || name.trim().length < 1 ||
-    typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    typeof message !== "string" || message.trim().length < 10
-  ) {
+  const parsed = contactSchema.safeParse(raw);
+  if (!parsed.success) {
     return NextResponse.json({ error: "Missing or invalid fields" }, { status: 422 });
   }
 
-  if (service && !SERVICES.includes(service as typeof SERVICES[number])) {
-    return NextResponse.json({ error: "Invalid service" }, { status: 422 });
+  const { name, email, company, service, message, _hp } = parsed.data;
+
+  // Honeypot — bots fill hidden field, humans don't
+  if (_hp) {
+    return NextResponse.json({ ok: true });
   }
 
   try {
