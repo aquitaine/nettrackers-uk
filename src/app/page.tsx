@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Testimonials } from "@/components/Testimonials";
 
@@ -36,8 +37,16 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
+      <section className="bg-brand-navy text-white relative overflow-hidden">
+        <Image
+          src="/images/hero-home.webp"
+          alt=""
+          fill
+          className="object-cover opacity-20 mix-blend-luminosity"
+          priority
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-36">
           <p className="text-brand-teal font-semibold text-sm uppercase tracking-widest mb-4">
             SEO &amp; Programming Agency · London
           </p>
@@ -77,22 +86,31 @@ export default function HomePage() {
                 title: "Technical SEO",
                 description:
                   "Deep-crawl audits, Core Web Vitals fixes, schema markup, and ongoing rank tracking so Google rewards your site.",
+                image: "/images/service-seo-audit.webp",
+                alt: "SEO audit illustration",
               },
               {
                 title: "Web Development",
                 description:
                   "Fast, accessible Next.js sites and web apps — built to load in under 2 s and convert visitors into clients.",
+                image: "/images/service-web-dev.webp",
+                alt: "Web development illustration",
               },
               {
                 title: "SEO Tooling",
                 description:
                   "Custom dashboards, audit automation, and GSC/GA4 integrations that give you data without the spreadsheet wrangling.",
+                image: "/images/service-seo-tooling.webp",
+                alt: "SEO tooling dashboard illustration",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl bg-white p-8 shadow-sm border border-gray-100"
+                className="rounded-2xl bg-white p-8 shadow-sm border border-gray-100 flex flex-col"
               >
+                <div className="mb-6 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center h-40">
+                  <Image src={item.image} alt={item.alt} width={160} height={160} className="object-contain h-36 w-36" />
+                </div>
                 <h3 className="text-xl font-semibold text-brand-navy mb-3">{item.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{item.description}</p>
               </div>

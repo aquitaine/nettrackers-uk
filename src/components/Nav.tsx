@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -59,8 +60,8 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-brand-navy tracking-tight">
-          Bess Damm
+        <Link href="/" className="flex items-center" aria-label="Bess Damm — home">
+          <Image src="/logo.svg" alt="Bess Damm" width={140} height={32} priority />
         </Link>
 
         {/* Desktop nav */}

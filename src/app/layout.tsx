@@ -24,12 +24,21 @@ export const metadata: Metadata = {
     title: "Bess Damm | SEO & Programming Agency London",
     description:
       "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
+    images: [
+      {
+        url: "/images/og-default.webp",
+        width: 1200,
+        height: 630,
+        alt: "Bess Damm — SEO & Programming Agency London",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Bess Damm | SEO & Programming Agency London",
     description:
       "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
+    images: ["/images/og-default.webp"],
   },
   robots: {
     index: true,
@@ -51,7 +60,7 @@ const organizationJsonLd = {
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
   name: "Bess Damm",
   url: "https://bessdamm.com",
-  logo: "https://bessdamm.com/logo.png",
+  logo: "https://bessdamm.com/logo.svg",
   description:
     "London-based SEO and programming agency. Technical SEO, web development, and bespoke SEO tooling for London businesses.",
   address: {
