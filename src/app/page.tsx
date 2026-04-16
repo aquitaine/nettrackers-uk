@@ -34,132 +34,169 @@ export const metadata: Metadata = {
     "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
 };
 
+const trustTags = [
+  "Local SEO",
+  "Technical SEO",
+  "Content Strategy",
+  "Growth-Focused Consultancy",
+];
+
+const clients = ["Client 1", "Client 2"];
+
 export default function HomePage() {
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#F2EFE9] overflow-hidden" style={{ minHeight: "calc(100vh - 72px)" }}>
-
-        {/* Cityscape — full bleed, heavily desaturated and faded */}
+      <section
+        className="relative overflow-hidden flex flex-col bg-[#f0ece4]"
+        style={{ minHeight: "calc(100vh - 72px)" }}
+      >
+        {/* Full-colour, full-opacity cityscape */}
         <div className="absolute inset-0">
           <Image
             src="/images/hero-home.webp"
             alt=""
             fill
-            className="object-cover object-center opacity-[0.14] saturate-0"
+            className="object-cover object-[center_35%]"
             priority
             aria-hidden="true"
           />
         </div>
 
-        {/* Left-to-right fade keeps the copy zone clean */}
+        {/* Layer 1 — upper-left text-zone wash */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to right, #F2EFE9 38%, rgba(242,239,233,0.72) 62%, rgba(242,239,233,0.18) 100%)",
+              "linear-gradient(135deg, rgba(255,252,247,0.88) 0%, rgba(255,252,247,0.62) 28%, rgba(255,252,247,0.22) 52%, rgba(255,252,247,0) 72%)",
           }}
         />
 
-        {/* Animated network lines */}
+        {/* Layer 2 — bottom blend into trust bar */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(255,252,247,0.75) 0%, rgba(255,252,247,0) 100%)",
+          }}
+        />
+
+        {/* Constellation animation */}
         <HeroBackground />
 
-        {/* Thin teal left-rail accent */}
-        <div className="absolute left-[max(calc(50%-38rem),24px)] top-16 bottom-16 w-px bg-brand-teal/20 hidden md:block" />
+        {/* ── Copy block ─────────────────────────────────────────────── */}
+        <div className="relative flex-1 flex items-center">
+          <div className="mx-auto max-w-7xl w-full px-6 lg:px-10 pt-20 pb-10 md:pt-28 md:pb-12">
+            <div className="max-w-[600px]">
 
-        {/* ── Copy block ────────────────────────────────── */}
-        <div
-          className="relative mx-auto max-w-6xl px-6 flex flex-col justify-center"
-          style={{ minHeight: "inherit", paddingTop: "6rem", paddingBottom: "5rem" }}
-        >
-          <div className="max-w-[640px]">
-
-            {/* Eyebrow */}
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-400 mb-7"
-              style={{ animation: "fadeIn 0.7s ease both", animationDelay: "0.1s" }}
-            >
-              Islington SEO Consultancy
-            </p>
-
-            {/* Headline */}
-            <h1
-              className="font-serif text-[3rem] md:text-[3.75rem] leading-[1.06] tracking-[-0.02em] text-[#1A1A1A] mb-7"
-              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.25s" }}
-            >
-              Search authority for<br />
-              London businesses<br />
-              with global ambition
-            </h1>
-
-            {/* Supporting paragraph */}
-            <p
-              className="text-[1.0625rem] text-gray-500 leading-[1.7] max-w-[460px] mb-10"
-              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.45s" }}
-            >
-              We help ambitious businesses improve visibility, strengthen
-              authority, and turn search into sustained commercial growth
-              through strategic SEO and bespoke web tooling.
-            </p>
-
-            {/* CTA row */}
-            <div
-              className="flex flex-wrap gap-4 mb-10"
-              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.6s" }}
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-sm font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10"
+              {/* Eyebrow */}
+              <div
+                style={{ animation: "fadeIn 0.7s ease both", animationDelay: "0.1s" }}
               >
-                Request a Proposal
-              </Link>
-              <Link
-                href="/work"
-                className="inline-flex items-center rounded-lg border border-gray-300 bg-white/60 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] hover:bg-white/90 transition-colors backdrop-blur-sm"
-              >
-                View Case Studies
-              </Link>
-            </div>
+                <p className="text-[15px] text-gray-700 mb-3 tracking-wide">
+                  Islington SEO Consultancy
+                </p>
+                <div className="h-px w-16 bg-gray-500/40 mb-8" />
+              </div>
 
-            {/* Trust cue row */}
-            <div
-              className="flex flex-wrap items-center gap-y-2 text-[13px] text-gray-400"
-              style={{ animation: "fadeIn 1s ease both", animationDelay: "0.8s" }}
-            >
-              {[
-                "Local SEO",
-                "Technical SEO",
-                "Content Strategy",
-                "Growth-Focused Consultancy",
-              ].map((tag, i, arr) => (
-                <span key={tag} className="flex items-center">
-                  <span>{tag}</span>
-                  {i < arr.length - 1 && (
-                    <span className="mx-3 text-brand-teal/40 select-none">·</span>
-                  )}
-                </span>
-              ))}
+              {/* Headline */}
+              <h1
+                className="font-serif text-[2.6rem] md:text-[3.6rem] lg:text-[4.1rem] leading-[1.05] tracking-[-0.015em] text-[#1a1a1a] mb-7"
+                style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.25s" }}
+              >
+                Search authority for Islington businesses{" "}
+                <em className="italic font-normal">with London ambition</em>
+              </h1>
+
+              {/* Subtext */}
+              <p
+                className="text-[17px] text-gray-800 leading-[1.65] mb-10 max-w-[520px]"
+                style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.45s" }}
+              >
+                We help ambitious businesses improve visibility, strengthen authority,
+                and turn search into sustained commercial growth through strategic SEO.
+              </p>
+
+              {/* CTAs */}
+              <div
+                className="flex flex-wrap gap-4"
+                style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.6s" }}
+              >
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-[15px] font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/15"
+                >
+                  Request a Proposal
+                </Link>
+                <Link
+                  href="/work"
+                  className="inline-flex items-center rounded-lg border border-gray-300 bg-white/80 px-7 py-3.5 text-[15px] font-semibold text-[#1a1a1a] hover:bg-white transition-colors backdrop-blur-sm"
+                >
+                  View Case Studies
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ── Proof strip ──────────────────────────────── */}
-        <div className="relative border-t border-gray-200/60 bg-white/55 backdrop-blur-sm">
-          <div className="mx-auto max-w-6xl px-6 py-5 flex flex-wrap items-center gap-x-10 gap-y-4">
-            <div className="flex items-baseline gap-2.5">
-              <span className="text-[1.4rem] font-bold text-brand-teal">+184%</span>
-              <span className="text-sm text-gray-500">Organic Traffic</span>
+        {/* ── Trust bar ──────────────────────────────────────────────── */}
+        <div
+          className="relative bg-white/50 backdrop-blur-sm border-t border-white/60"
+          style={{ animation: "fadeIn 1s ease both", animationDelay: "0.8s" }}
+        >
+          <div className="mx-auto max-w-7xl px-6 lg:px-10 py-[14px] flex items-center justify-center flex-wrap gap-y-2">
+            <span className="h-px w-6 bg-gray-400/50 hidden sm:block" />
+            {trustTags.map((tag, i) => (
+              <span key={tag} className="flex items-center">
+                <span className="px-4 md:px-5 text-[13px] text-gray-700 tracking-wide">
+                  {tag}
+                </span>
+                {i < trustTags.length - 1 && (
+                  <span className="h-[14px] w-px bg-gray-400/50" />
+                )}
+              </span>
+            ))}
+            <span className="h-px w-6 bg-gray-400/50 hidden sm:block" />
+          </div>
+        </div>
+
+        {/* ── Proof strip ────────────────────────────────────────────── */}
+        <div
+          className="relative bg-white/65 backdrop-blur-sm border-t border-white/40"
+          style={{ animation: "fadeIn 1s ease both", animationDelay: "0.9s" }}
+        >
+          <div className="mx-auto max-w-7xl px-6 lg:px-10 py-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+
+            {/* Client logos */}
+            <div className="flex items-center gap-6">
+              {clients.map((name) => (
+                <span
+                  key={name}
+                  className="flex items-center gap-2 text-[11px] tracking-[0.18em] font-semibold text-gray-400 uppercase"
+                >
+                  <span className="inline-block w-2.5 h-2.5 rotate-45 bg-gray-300 shrink-0" />
+                  {name}
+                </span>
+              ))}
             </div>
-            <div className="hidden sm:block h-5 w-px bg-gray-200" />
-            <div className="flex items-baseline gap-2.5">
-              <span className="text-[1.4rem] font-bold text-[#1A1A1A]">3×</span>
-              <span className="text-sm text-gray-500">Lead Volume Growth</span>
+
+            <span className="hidden sm:block h-5 w-px bg-gray-300/60" />
+
+            <div className="flex items-baseline gap-2">
+              <span className="text-[1.35rem] font-bold text-brand-teal">+184%</span>
+              <span className="text-[13px] text-gray-600">Organic Traffic</span>
             </div>
-            <div className="hidden sm:block h-5 w-px bg-gray-200" />
-            <div className="flex items-baseline gap-2.5">
-              <span className="text-[1.4rem] font-bold text-brand-teal">Top&nbsp;3</span>
-              <span className="text-sm text-gray-500">Page-One Ranking Gains</span>
-            </div>
+
+            <span className="hidden sm:block h-5 w-px bg-gray-300/60" />
+
+            <span className="text-[13px] text-gray-600">Page-One Local Ranking Gains</span>
+
+            <span className="hidden sm:block h-5 w-px bg-gray-300/60" />
+
+            <span className="text-[13px] text-gray-600 leading-snug text-right">
+              Trusted Across<br />
+              Islington &amp; London
+            </span>
           </div>
         </div>
       </section>
@@ -228,11 +265,19 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl text-[#1A1A1A] mb-3 group-hover:text-brand-teal transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-[15px] text-gray-500 leading-relaxed flex-1">{item.description}</p>
+                <p className="text-[15px] text-gray-500 leading-relaxed flex-1">
+                  {item.description}
+                </p>
                 <div className="mt-6 text-[13px] font-semibold text-brand-teal flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn more
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M3 7h8M7 3l4 4-4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </Link>
