@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/lib/blog";
 
-const SITE_URL = "https://bessdamm.com";
+const SITE_URL = "https://nettrackers.co.uk";
 
 export function GET() {
   const posts = getAllPosts();
@@ -14,7 +14,7 @@ export function GET() {
       <guid isPermaLink="true">${SITE_URL}/blog/${post.slug}</guid>
       <description><![CDATA[${post.description}]]></description>
       <pubDate>${new Date(post.datePublished).toUTCString()}</pubDate>
-      <author>hello@bessdamm.com (${post.author})</author>
+      <author>hello@nettrackers.co.uk (${post.author})</author>
     </item>`
     )
     .join("");
@@ -22,9 +22,9 @@ export function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bess Damm Insights</title>
+    <title>NetTrackers Insights</title>
     <link>${SITE_URL}</link>
-    <description>SEO and web development insights from Bess Damm — London's technical SEO and programming agency.</description>
+    <description>SEO and web development insights from NetTrackers — London's technical SEO and programming agency.</description>
     <language>en-gb</language>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     ${items}

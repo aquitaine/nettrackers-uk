@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllCaseStudies } from "@/lib/work";
 import { getAllPosts } from "@/lib/blog";
 
-const BASE_URL = "https://bessdamm.com";
+const BASE_URL = "https://nettrackers.co.uk";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudies = getAllCaseStudies().map((cs) => ({

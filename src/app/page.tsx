@@ -7,7 +7,7 @@ import { HeroBackground } from "@/components/HeroBackground";
 const testimonials = [
   {
     quote:
-      "Bess Damm rebuilt our technical SEO foundation from the ground up. Organic traffic more than doubled in six months and we now rank for terms our competitors have owned for years.",
+      "NetTrackers rebuilt our technical SEO foundation from the ground up. Organic traffic more than doubled in six months and we now rank for terms our competitors have owned for years.",
     author: "Head of Growth",
     role: "Series A FinTech",
     company: "London",
@@ -29,7 +29,7 @@ const testimonials = [
 ];
 
 export const metadata: Metadata = {
-  title: "Bess Damm | SEO & Programming Agency London",
+  title: "NetTrackers | SEO & Programming Agency London",
   description:
     "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
 };

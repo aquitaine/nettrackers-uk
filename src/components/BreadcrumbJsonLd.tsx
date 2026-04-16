@@ -1,4 +1,4 @@
-const BASE_URL = "https://bessdamm.com";
+const BASE_URL = "https://nettrackers.co.uk";
 
 interface BreadcrumbItem {
   name: string;

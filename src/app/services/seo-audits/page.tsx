@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   description:
     "One-time technical and on-page SEO audits for London businesses. Get a prioritised fix list covering Core Web Vitals, indexing, schema, and more.",
   openGraph: {
-    title: "SEO Audit Services | Bess Damm",
+    title: "SEO Audit Services | NetTrackers",
     description:
       "One-time technical and on-page SEO audits for London businesses. Prioritised fix list, actionable insights.",
-    url: "https://bessdamm.com/services/seo-audits",
+    url: "https://nettrackers.co.uk/services/seo-audits",
   },
 };
 
@@ -116,13 +116,13 @@ export default function SeoAuditsPage() {
     name: "SEO Audit",
     provider: {
       "@type": "ProfessionalService",
-      name: "Bess Damm",
+      name: "NetTrackers",
       address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
     },
     description:
       "One-time technical and on-page SEO audits covering Core Web Vitals, indexing, schema, and more.",
     areaServed: "London",
-    url: "https://bessdamm.com/services/seo-audits",
+    url: "https://nettrackers.co.uk/services/seo-audits",
   };
 
   return (

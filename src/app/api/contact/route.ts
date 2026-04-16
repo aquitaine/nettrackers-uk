@@ -40,8 +40,8 @@ async function checkRateLimit(ip: string): Promise<boolean> {
 // ---------------------------------------------------------------------------
 // Route handler
 // ---------------------------------------------------------------------------
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@bessdamm.com";
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "noreply@bessdamm.com";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@nettrackers.co.uk";
+const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "noreply@nettrackers.co.uk";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
