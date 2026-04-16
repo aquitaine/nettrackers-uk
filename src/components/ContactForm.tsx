@@ -11,17 +11,29 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileRef = useRef<TurnstileInstance>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setErrorMsg("Security check not ready yet — please wait a moment and try again.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMsg("");
 
     const form = e.currentTarget;
     const raw = Object.fromEntries(new FormData(form)) as Record<string, string>;
-    // Strip empty strings so optional fields don't fail Zod enum validation
-    const data = Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== ""));
+    // Strip empty strings so optional fields don't fail Zod enum validation,
+    // then inject the Turnstile token captured via onSuccess callback
+    const data = {
+      ...Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== "")),
+      "cf-turnstile-response": turnstileToken,
+    };
 
     try {
       const res = await fetch("/api/contact", {
@@ -41,6 +53,7 @@ export function ContactForm() {
       setStatus("success");
     } catch (err) {
       turnstileRef.current?.reset();
+      setTurnstileToken(null);
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
       setStatus("error");
     }
@@ -132,11 +145,14 @@ export function ContactForm() {
         />
       </div>
 
-      {/* Turnstile invisible challenge — token submitted as cf-turnstile-response */}
+      {/* Turnstile — captures token in state via onSuccess, not via FormData */}
       <Turnstile
         ref={turnstileRef}
         siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
         options={{ appearance: "interaction-only" }}
+        onSuccess={(token) => setTurnstileToken(token)}
+        onExpire={() => setTurnstileToken(null)}
+        onError={() => setTurnstileToken(null)}
       />
 
       {status === "error" && (
