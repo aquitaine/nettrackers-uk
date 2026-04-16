@@ -35,10 +35,10 @@ export const metadata: Metadata = {
 };
 
 const trustTags = [
-  "Local SEO",
-  "Technical SEO",
-  "Content Strategy",
-  "Growth-Focused Consultancy",
+  { label: "Local SEO",                   href: "/services/local-seo" },
+  { label: "Technical SEO",               href: "/services/seo-audits" },
+  { label: "Content Strategy",            href: "/services/content-strategy" },
+  { label: "Growth-Focused Consultancy",  href: "/services/seo-retainers" },
 ];
 
 const clients = ["Client 1", "Client 2"];
@@ -104,8 +104,8 @@ export default function HomePage() {
                 className="font-serif text-[2.6rem] md:text-[3.6rem] lg:text-[4.1rem] leading-[1.05] tracking-[-0.015em] text-[#1a1a1a] mb-7"
                 style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.25s" }}
               >
-                Search authority for Islington businesses{" "}
-                <em className="italic font-normal">with London ambition</em>
+                Search authority for British businesses{" "}
+                <em className="italic font-normal">with global ambition</em>
               </h1>
 
               {/* Subtext */}
@@ -147,10 +147,13 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-10 py-[14px] flex items-center justify-center flex-wrap gap-y-2">
             <span className="h-px w-6 bg-gray-400/50 hidden sm:block" />
             {trustTags.map((tag, i) => (
-              <span key={tag} className="flex items-center">
-                <span className="px-4 md:px-5 text-[13px] text-gray-700 tracking-wide">
-                  {tag}
-                </span>
+              <span key={tag.label} className="flex items-center">
+                <Link
+                  href={tag.href}
+                  className="px-4 md:px-5 text-[13px] text-gray-700 tracking-wide hover:text-brand-teal transition-colors"
+                >
+                  {tag.label}
+                </Link>
                 {i < trustTags.length - 1 && (
                   <span className="h-[14px] w-px bg-gray-400/50" />
                 )}
