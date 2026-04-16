@@ -72,9 +72,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
+  console.log("[contact] attempting send → to:", TO_EMAIL, "from:", FROM_EMAIL);
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
@@ -91,6 +93,12 @@ export async function POST(req: NextRequest) {
         .join("\n"),
     });
 
+    if (result.error) {
+      console.error("[contact] Resend rejected:", JSON.stringify(result.error));
+      return NextResponse.json({ error: "Failed to send" }, { status: 500 });
+    }
+
+    console.log("[contact] sent ok, id:", result.data?.id);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[contact] Resend error:", err);
