@@ -37,39 +37,109 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white relative overflow-hidden">
-        <Image
-          src="/images/hero-home.webp"
-          alt=""
-          fill
-          className="object-cover opacity-20 mix-blend-luminosity"
-          priority
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-36">
-          <p className="text-brand-teal font-semibold text-sm uppercase tracking-widest mb-4">
-            SEO &amp; Programming Agency · London
-          </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
-            Grow faster with technical SEO and bespoke software
-          </h1>
-          <p className="mt-6 text-lg text-gray-300 max-w-2xl">
-            We help London businesses rank higher and convert better — through expert SEO
-            strategy and hand-crafted web tools built for scale.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/services"
-              className="rounded-lg bg-brand-teal px-6 py-3 font-semibold text-white hover:bg-teal-600 transition-colors"
+      <section className="bg-[#F5F3EE] relative overflow-hidden">
+        {/* Right-side background image with grid overlay */}
+        <div className="absolute inset-0 hidden md:block">
+          {/* Solid left panel so text is never over the image */}
+          <div className="absolute left-0 top-0 bottom-0 w-[42%] bg-[#F5F3EE]" />
+          {/* Image occupies the right 58% */}
+          <div className="absolute right-0 top-0 bottom-0 w-[62%]">
+            <Image
+              src="/images/hero-home.webp"
+              alt=""
+              fill
+              className="object-cover object-center"
+              priority
+              aria-hidden="true"
+            />
+            {/* Geometric grid lines */}
+            <svg
+              className="absolute inset-0 w-full h-full opacity-20"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
-              See our services
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors"
-            >
-              Talk to us
-            </Link>
+              <defs>
+                <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M60 0L0 60M0 0l60 60" stroke="white" strokeWidth="0.75" fill="none" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+            {/* Fade to left */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F3EE] via-[#F5F3EE]/50 to-transparent" />
+          </div>
+        </div>
+
+        {/* Mobile: subtle full-bleed image */}
+        <div className="absolute inset-0 md:hidden">
+          <Image
+            src="/images/hero-home.webp"
+            alt=""
+            fill
+            className="object-cover opacity-10"
+            priority
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-40">
+          <div className="max-w-[560px]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-5">
+              Bess Damm · SEO &amp; Programming Agency
+            </p>
+            <h1 className="font-serif text-5xl md:text-[3.5rem] leading-[1.1] text-brand-navy">
+              Search authority for London businesses with global ambition
+            </h1>
+            <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+              We help ambitious businesses improve visibility, strengthen authority,
+              and turn search into sustained commercial growth through strategic SEO
+              and bespoke web tooling.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="rounded-lg bg-brand-teal px-6 py-3.5 font-semibold text-white hover:bg-teal-700 transition-colors shadow-sm"
+              >
+                Request a Proposal
+              </Link>
+              <Link
+                href="/work"
+                className="rounded-lg border border-gray-300 bg-white/70 px-6 py-3.5 font-semibold text-brand-navy hover:bg-white transition-colors"
+              >
+                View Case Studies
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm text-gray-500">
+              {["Local SEO", "Technical SEO", "Content Strategy", "Growth-Focused Consultancy"].map(
+                (tag, i, arr) => (
+                  <span key={tag} className="flex items-center gap-1">
+                    {tag}
+                    {i < arr.length - 1 && <span className="mx-1 text-gray-300">·</span>}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Metrics strip */}
+        <div className="relative border-t border-gray-200 bg-white/80 backdrop-blur-sm">
+          <div className="mx-auto max-w-6xl px-6 py-5 flex flex-wrap items-center gap-x-10 gap-y-3">
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-brand-teal">+184%</span>
+              <span className="text-sm text-gray-600">Organic Traffic</span>
+            </div>
+            <div className="hidden sm:block h-7 w-px bg-gray-200" />
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-brand-navy">3×</span>
+              <span className="text-sm text-gray-600">Lead Volume Growth</span>
+            </div>
+            <div className="hidden sm:block h-7 w-px bg-gray-200" />
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-brand-teal">Top&nbsp;3</span>
+              <span className="text-sm text-gray-600">Local Ranking Gains</span>
+            </div>
           </div>
         </div>
       </section>
