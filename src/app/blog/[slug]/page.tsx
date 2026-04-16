@@ -49,12 +49,12 @@ export default function BlogPostPage({ params }: Props) {
     author: {
       "@type": "Organization",
       name: post.author,
-      url: "https://bessdamm.com",
+      url: "https://nettrackers.co.uk",
     },
     publisher: {
       "@type": "Organization",
-      name: "Bess Damm",
-      url: "https://bessdamm.com",
+      name: "NetTrackers",
+      url: "https://nettrackers.co.uk",
     },
   };
 

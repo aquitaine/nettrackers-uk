@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Bess Damm is a London SEO and programming agency. Meet the team behind the strategy and code.",
+    "NetTrackers is a London SEO and programming agency. Meet the team behind the strategy and code.",
 };
 
 export default function AboutPage() {
@@ -12,10 +12,10 @@ export default function AboutPage() {
     <div className="mx-auto max-w-5xl px-6 py-20">
       <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
         <div>
-          <h1 className="text-4xl font-extrabold text-brand-navy mb-6">About Bess Damm</h1>
+          <h1 className="text-4xl font-extrabold text-brand-navy mb-6">About NetTrackers</h1>
           <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-5">
             <p>
-              Bess Damm is a London-based SEO and programming agency founded on a single belief:
+              NetTrackers is a London-based SEO and programming agency founded on a single belief:
               the best results come from combining deep technical knowledge with genuine craft.
             </p>
             <p>
@@ -33,7 +33,7 @@ export default function AboutPage() {
         <div className="rounded-2xl overflow-hidden shadow-lg bg-brand-light">
           <Image
             src="/images/about-team.webp"
-            alt="The Bess Damm team collaborating"
+            alt="The NetTrackers team collaborating"
             width={600}
             height={450}
             className="w-full h-auto object-cover"

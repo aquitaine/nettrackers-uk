@@ -5,7 +5,7 @@ import { getAllCaseStudies } from "@/lib/work";
 export const metadata: Metadata = {
   title: "Our Work",
   description:
-    "Case studies from Bess Damm — real results for London businesses. See how we've grown organic traffic, improved Core Web Vitals, and built websites that convert.",
+    "Case studies from NetTrackers — real results for London businesses. See how we've grown organic traffic, improved Core Web Vitals, and built websites that convert.",
 };
 
 export default function WorkIndexPage() {

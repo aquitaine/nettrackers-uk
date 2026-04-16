@@ -10,19 +10,19 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 
 export const metadata: Metadata = {
   title: {
-    default: "Bess Damm | SEO & Programming Agency London",
-    template: "%s | Bess Damm",
+    default: "NetTrackers | SEO & Programming Agency London",
+    template: "%s | NetTrackers",
   },
   description:
     "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
   keywords: ["SEO agency London", "web development London", "SEO services", "programming agency"],
-  metadataBase: new URL("https://bessdamm.com"),
+  metadataBase: new URL("https://nettrackers.co.uk"),
   openGraph: {
     type: "website",
     locale: "en_GB",
-    url: "https://bessdamm.com",
-    siteName: "Bess Damm",
-    title: "Bess Damm | SEO & Programming Agency London",
+    url: "https://nettrackers.co.uk",
+    siteName: "NetTrackers",
+    title: "NetTrackers | SEO & Programming Agency London",
     description:
       "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
     images: [
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
         url: "/images/og-default.webp",
         width: 1200,
         height: 630,
-        alt: "Bess Damm — SEO & Programming Agency London",
+        alt: "NetTrackers — SEO & Programming Agency London",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bess Damm | SEO & Programming Agency London",
+    title: "NetTrackers | SEO & Programming Agency London",
     description:
       "London-based SEO and programming agency. We build fast, search-optimised websites and tools that grow your business.",
     images: ["/images/og-default.webp"],
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
-  name: "Bess Damm",
-  url: "https://bessdamm.com",
-  logo: "https://bessdamm.com/logo.svg",
+  name: "NetTrackers",
+  url: "https://nettrackers.co.uk",
+  logo: "https://nettrackers.co.uk/logo.svg",
   description:
     "London-based SEO and programming agency. Technical SEO, web development, and bespoke SEO tooling for London businesses.",
   address: {
@@ -76,8 +76,8 @@ const organizationJsonLd = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "hello@bessdamm.com",
-    url: "https://bessdamm.com/contact",
+    email: "hello@nettrackers.co.uk",
+    url: "https://nettrackers.co.uk/contact",
   },
   sameAs: [],
   knowsAbout: [

@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 const testimonial = [
   {
     quote:
-      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website Bess Damm built is the best investment we've made in years.",
+      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website NetTrackers built is the best investment we've made in years.",
     author: "Managing Partner",
     role: "Boutique Law Firm",
     company: "London",
@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   description:
     "Custom Next.js websites and web apps built for speed, accessibility, and conversions. London web development agency — from landing pages to full product builds.",
   openGraph: {
-    title: "Web Development Services | Bess Damm",
+    title: "Web Development Services | NetTrackers",
     description:
       "Custom Next.js websites and web apps built for speed, accessibility, and conversions.",
-    url: "https://bessdamm.com/services/web-development",
+    url: "https://nettrackers.co.uk/services/web-development",
   },
 };
 
@@ -118,13 +118,13 @@ export default function WebDevelopmentPage() {
     name: "Web Development",
     provider: {
       "@type": "ProfessionalService",
-      name: "Bess Damm",
+      name: "NetTrackers",
       address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
     },
     description:
       "Custom Next.js websites and web apps built for speed, accessibility, and conversions.",
     areaServed: "London",
-    url: "https://bessdamm.com/services/web-development",
+    url: "https://nettrackers.co.uk/services/web-development",
   };
 
   return (

@@ -74,8 +74,8 @@ export function Nav() {
       }`}
     >
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center" aria-label="Bess Damm — home">
-          <Image src="/logo.svg" alt="Bess Damm" width={140} height={32} priority />
+        <Link href="/" className="flex items-center" aria-label="NetTrackers — home">
+          <Image src="/logo.svg" alt="NetTrackers" width={140} height={32} priority />
         </Link>
 
         {/* Desktop nav */}

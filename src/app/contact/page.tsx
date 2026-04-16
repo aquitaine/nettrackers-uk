@@ -5,7 +5,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Bess Damm — London SEO and programming agency. We'll respond within one business day.",
+    "Get in touch with NetTrackers — London SEO and programming agency. We'll respond within one business day.",
 };
 
 export default function ContactPage() {
@@ -22,8 +22,8 @@ export default function ContactPage() {
 
       <p className="mt-8 text-sm text-gray-600 text-center">
         Or email us directly at{" "}
-        <a href="mailto:hello@bessdamm.com" className="text-brand-teal hover:underline">
-          hello@bessdamm.com
+        <a href="mailto:hello@nettrackers.co.uk" className="text-brand-teal hover:underline">
+          hello@nettrackers.co.uk
         </a>
       </p>
     </div>

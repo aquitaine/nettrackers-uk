@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 const testimonial = [
   {
     quote:
-      "Bess Damm became a true extension of our marketing team. They didn't just do SEO — they built us tooling, reported on what actually mattered, and helped us make better product decisions based on search data.",
+      "NetTrackers became a true extension of our marketing team. They didn't just do SEO — they built us tooling, reported on what actually mattered, and helped us make better product decisions based on search data.",
     author: "VP Marketing",
     role: "B2B SaaS Company",
     company: "London",
@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   description:
     "Monthly SEO management for London businesses. Ongoing strategy, content briefs, rank tracking, and reporting — so you stay ahead of algorithm changes.",
   openGraph: {
-    title: "SEO Retainer Services | Bess Damm",
+    title: "SEO Retainer Services | NetTrackers",
     description:
       "Monthly SEO management: strategy, content, rank tracking, reporting. Stay ahead of algorithm changes.",
-    url: "https://bessdamm.com/services/seo-retainers",
+    url: "https://nettrackers.co.uk/services/seo-retainers",
   },
 };
 
@@ -125,13 +125,13 @@ export default function SeoRetainersPage() {
     name: "SEO Retainer",
     provider: {
       "@type": "ProfessionalService",
-      name: "Bess Damm",
+      name: "NetTrackers",
       address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
     },
     description:
       "Monthly SEO management including strategy, content briefs, rank tracking, and algorithm response.",
     areaServed: "London",
-    url: "https://bessdamm.com/services/seo-retainers",
+    url: "https://nettrackers.co.uk/services/seo-retainers",
   };
 
   return (
