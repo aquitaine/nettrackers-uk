@@ -14,15 +14,16 @@ export default function WorkIndexPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="text-brand-teal font-semibold text-sm uppercase tracking-widest mb-3">
+      <section className="bg-[#f0ece4]">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-teal mb-4">
             Case Studies
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold">
-            Results that speak for themselves
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-[-0.015em] text-[#1a1a1a]">
+            Results that{" "}
+            <em className="italic font-normal">speak for themselves</em>
           </h1>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
+          <p className="mt-6 text-[17px] text-gray-600 leading-[1.65] max-w-2xl">
             Real projects, real numbers. Here&apos;s how we&apos;ve helped London businesses grow
             through technical SEO and bespoke web development.
           </p>
