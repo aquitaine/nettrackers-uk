@@ -134,15 +134,16 @@ export default function ContentStrategyPage() {
       />
 
       {/* Hero */}
-      <section className="bg-brand-navy text-white">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <p className="text-brand-teal font-semibold text-sm uppercase tracking-widest mb-4">
+      <section className="bg-[#f0ece4]">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-teal mb-4">
             Service · Content Strategy
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight max-w-3xl">
-            Content that earns rankings, authority, and revenue
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-[-0.015em] text-[#1a1a1a] max-w-3xl">
+            Content that earns rankings, authority,{" "}
+            <em className="italic font-normal">and revenue</em>
           </h1>
-          <p className="mt-6 text-lg text-gray-300 max-w-2xl">
+          <p className="mt-6 text-[17px] text-gray-600 leading-[1.65] max-w-2xl">
             We build and execute SEO content strategies that systematically grow your organic
             traffic — through keyword research, topical authority mapping, and content that is
             genuinely worth reading and ranking.
@@ -150,13 +151,13 @@ export default function ContentStrategyPage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               href="/contact"
-              className="rounded-lg bg-brand-teal px-6 py-3 font-semibold text-white hover:bg-teal-600 transition-colors"
+              className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-[15px] font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/15"
             >
               Get a free content audit
             </Link>
             <Link
               href="/services"
-              className="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center rounded-lg border border-gray-300 bg-white/80 px-7 py-3.5 text-[15px] font-semibold text-[#1a1a1a] hover:bg-white transition-colors backdrop-blur-sm"
             >
               All services
             </Link>

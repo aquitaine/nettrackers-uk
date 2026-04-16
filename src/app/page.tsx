@@ -41,7 +41,7 @@ const trustTags = [
   { label: "Growth-Focused Consultancy",  href: "/services/seo-retainers" },
 ];
 
-const clients = ["Client 1", "Client 2"];
+const clients = ["FinTech · Series A", "Boutique Law · London"];
 
 export default function HomePage() {
   return (
