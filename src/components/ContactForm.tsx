@@ -25,6 +25,11 @@ export function ContactForm() {
     setDebug(null);
 
     const form = e.currentTarget;
+    // Clear honeypot before reading — browser autofill sometimes fills hidden
+    // off-screen fields, which triggers the bot-detection check on the server.
+    const hp = form.querySelector<HTMLInputElement>('input[name="_hp"]');
+    if (hp) hp.value = "";
+
     const data = Object.fromEntries(
       Object.entries(Object.fromEntries(new FormData(form))).filter(([, v]) => v !== "")
     ) as Record<string, string>;
