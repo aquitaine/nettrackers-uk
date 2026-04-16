@@ -5,19 +5,28 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const links = [
-  { href: "/services", label: "Services" },
-  { href: "/work", label: "Our Work" },
-  { href: "/blog", label: "Insights" },
+  { href: "/services", label: "SEO" },
+  { href: "/services#local-seo", label: "Local SEO" },
+  { href: "/services/web-development", label: "Web Design" },
+  { href: "/work", label: "Case Studies" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Close on Escape
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 30);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape" && open) {
@@ -29,7 +38,6 @@ export function Nav() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  // Focus trap inside mobile menu
   useEffect(() => {
     if (!open || !menuRef.current) return;
     const focusable = menuRef.current.querySelectorAll<HTMLElement>(
@@ -58,19 +66,25 @@ export function Nav() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="Bess Damm — home">
           <Image src="/logo.svg" alt="Bess Damm" width={140} height={32} priority />
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-7">
           {links.map((l) => (
-            <li key={l.href}>
+            <li key={l.href + l.label}>
               <Link
                 href={l.href}
-                className="text-sm font-medium text-gray-600 hover:text-brand-teal transition-colors"
+                className="text-[13px] font-medium text-gray-600 hover:text-brand-teal transition-colors"
               >
                 {l.label}
               </Link>
@@ -79,14 +93,14 @@ export function Nav() {
           <li>
             <Link
               href="/contact"
-              className="rounded-lg bg-brand-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 transition-colors"
+              className="rounded-lg bg-brand-teal px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-teal-700 transition-colors shadow-sm shadow-teal-900/10"
             >
-              Get in touch
+              Request a Proposal
             </Link>
           </li>
         </ul>
 
-        {/* Hamburger button */}
+        {/* Hamburger */}
         <button
           ref={buttonRef}
           className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
@@ -111,14 +125,14 @@ export function Nav() {
       <div
         id="mobile-menu"
         ref={menuRef}
-        className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
-          open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out bg-white ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
         aria-hidden={!open}
       >
-        <ul className="px-6 pb-4 flex flex-col gap-4 border-t border-gray-100 pt-4">
+        <ul className="px-6 pb-5 flex flex-col gap-4 border-t border-gray-100 pt-4">
           {links.map((l) => (
-            <li key={l.href}>
+            <li key={l.href + l.label}>
               <Link
                 href={l.href}
                 className="block text-sm font-medium text-gray-600 hover:text-brand-teal transition-colors"
@@ -132,11 +146,11 @@ export function Nav() {
           <li>
             <Link
               href="/contact"
-              className="inline-block rounded-lg bg-brand-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 transition-colors"
+              className="inline-block rounded-lg bg-brand-teal px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 transition-colors"
               onClick={() => setOpen(false)}
               tabIndex={open ? 0 : -1}
             >
-              Get in touch
+              Request a Proposal
             </Link>
           </li>
         </ul>

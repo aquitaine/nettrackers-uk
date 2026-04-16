@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Testimonials } from "@/components/Testimonials";
+import { HeroBackground } from "@/components/HeroBackground";
 
 const testimonials = [
   {
@@ -36,174 +37,231 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[#F5F3EE] relative overflow-hidden">
-        {/* Right-side background image with grid overlay */}
-        <div className="absolute inset-0 hidden md:block">
-          {/* Solid left panel so text is never over the image */}
-          <div className="absolute left-0 top-0 bottom-0 w-[42%] bg-[#F5F3EE]" />
-          {/* Image occupies the right 58% */}
-          <div className="absolute right-0 top-0 bottom-0 w-[62%]">
-            <Image
-              src="/images/hero-home.webp"
-              alt=""
-              fill
-              className="object-cover object-center"
-              priority
-              aria-hidden="true"
-            />
-            {/* Geometric grid lines */}
-            <svg
-              className="absolute inset-0 w-full h-full opacity-20"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <defs>
-                <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                  <path d="M60 0L0 60M0 0l60 60" stroke="white" strokeWidth="0.75" fill="none" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-            {/* Fade to left */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F3EE] via-[#F5F3EE]/50 to-transparent" />
-          </div>
-        </div>
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#F2EFE9] overflow-hidden" style={{ minHeight: "calc(100vh - 72px)" }}>
 
-        {/* Mobile: subtle full-bleed image */}
-        <div className="absolute inset-0 md:hidden">
+        {/* Cityscape — full bleed, heavily desaturated and faded */}
+        <div className="absolute inset-0">
           <Image
             src="/images/hero-home.webp"
             alt=""
             fill
-            className="object-cover opacity-10"
+            className="object-cover object-center opacity-[0.14] saturate-0"
             priority
             aria-hidden="true"
           />
         </div>
 
-        {/* Content */}
-        <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-40">
-          <div className="max-w-[560px]">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-5">
-              Bess Damm · SEO &amp; Programming Agency
+        {/* Left-to-right fade keeps the copy zone clean */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, #F2EFE9 38%, rgba(242,239,233,0.72) 62%, rgba(242,239,233,0.18) 100%)",
+          }}
+        />
+
+        {/* Animated network lines */}
+        <HeroBackground />
+
+        {/* Thin teal left-rail accent */}
+        <div className="absolute left-[max(calc(50%-38rem),24px)] top-16 bottom-16 w-px bg-brand-teal/20 hidden md:block" />
+
+        {/* ── Copy block ────────────────────────────────── */}
+        <div
+          className="relative mx-auto max-w-6xl px-6 flex flex-col justify-center"
+          style={{ minHeight: "inherit", paddingTop: "6rem", paddingBottom: "5rem" }}
+        >
+          <div className="max-w-[640px]">
+
+            {/* Eyebrow */}
+            <p
+              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-400 mb-7"
+              style={{ animation: "fadeIn 0.7s ease both", animationDelay: "0.1s" }}
+            >
+              Islington SEO Consultancy
             </p>
-            <h1 className="font-serif text-5xl md:text-[3.5rem] leading-[1.1] text-brand-navy">
-              Search authority for London businesses with global ambition
+
+            {/* Headline */}
+            <h1
+              className="font-serif text-[3rem] md:text-[3.75rem] leading-[1.06] tracking-[-0.02em] text-[#1A1A1A] mb-7"
+              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.25s" }}
+            >
+              Search authority for<br />
+              London businesses<br />
+              with global ambition
             </h1>
-            <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-              We help ambitious businesses improve visibility, strengthen authority,
-              and turn search into sustained commercial growth through strategic SEO
-              and bespoke web tooling.
+
+            {/* Supporting paragraph */}
+            <p
+              className="text-[1.0625rem] text-gray-500 leading-[1.7] max-w-[460px] mb-10"
+              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.45s" }}
+            >
+              We help ambitious businesses improve visibility, strengthen
+              authority, and turn search into sustained commercial growth
+              through strategic SEO and bespoke web tooling.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+
+            {/* CTA row */}
+            <div
+              className="flex flex-wrap gap-4 mb-10"
+              style={{ animation: "fadeInUp 0.85s ease both", animationDelay: "0.6s" }}
+            >
               <Link
                 href="/contact"
-                className="rounded-lg bg-brand-teal px-6 py-3.5 font-semibold text-white hover:bg-teal-700 transition-colors shadow-sm"
+                className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-sm font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10"
               >
                 Request a Proposal
               </Link>
               <Link
                 href="/work"
-                className="rounded-lg border border-gray-300 bg-white/70 px-6 py-3.5 font-semibold text-brand-navy hover:bg-white transition-colors"
+                className="inline-flex items-center rounded-lg border border-gray-300 bg-white/60 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] hover:bg-white/90 transition-colors backdrop-blur-sm"
               >
                 View Case Studies
               </Link>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm text-gray-500">
-              {["Local SEO", "Technical SEO", "Content Strategy", "Growth-Focused Consultancy"].map(
-                (tag, i, arr) => (
-                  <span key={tag} className="flex items-center gap-1">
-                    {tag}
-                    {i < arr.length - 1 && <span className="mx-1 text-gray-300">·</span>}
-                  </span>
-                )
-              )}
+
+            {/* Trust cue row */}
+            <div
+              className="flex flex-wrap items-center gap-y-2 text-[13px] text-gray-400"
+              style={{ animation: "fadeIn 1s ease both", animationDelay: "0.8s" }}
+            >
+              {[
+                "Local SEO",
+                "Technical SEO",
+                "Content Strategy",
+                "Growth-Focused Consultancy",
+              ].map((tag, i, arr) => (
+                <span key={tag} className="flex items-center">
+                  <span>{tag}</span>
+                  {i < arr.length - 1 && (
+                    <span className="mx-3 text-brand-teal/40 select-none">·</span>
+                  )}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Metrics strip */}
-        <div className="relative border-t border-gray-200 bg-white/80 backdrop-blur-sm">
-          <div className="mx-auto max-w-6xl px-6 py-5 flex flex-wrap items-center gap-x-10 gap-y-3">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-brand-teal">+184%</span>
-              <span className="text-sm text-gray-600">Organic Traffic</span>
+        {/* ── Proof strip ──────────────────────────────── */}
+        <div className="relative border-t border-gray-200/60 bg-white/55 backdrop-blur-sm">
+          <div className="mx-auto max-w-6xl px-6 py-5 flex flex-wrap items-center gap-x-10 gap-y-4">
+            <div className="flex items-baseline gap-2.5">
+              <span className="text-[1.4rem] font-bold text-brand-teal">+184%</span>
+              <span className="text-sm text-gray-500">Organic Traffic</span>
             </div>
-            <div className="hidden sm:block h-7 w-px bg-gray-200" />
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-brand-navy">3×</span>
-              <span className="text-sm text-gray-600">Lead Volume Growth</span>
+            <div className="hidden sm:block h-5 w-px bg-gray-200" />
+            <div className="flex items-baseline gap-2.5">
+              <span className="text-[1.4rem] font-bold text-[#1A1A1A]">3×</span>
+              <span className="text-sm text-gray-500">Lead Volume Growth</span>
             </div>
-            <div className="hidden sm:block h-7 w-px bg-gray-200" />
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-brand-teal">Top&nbsp;3</span>
-              <span className="text-sm text-gray-600">Local Ranking Gains</span>
+            <div className="hidden sm:block h-5 w-px bg-gray-200" />
+            <div className="flex items-baseline gap-2.5">
+              <span className="text-[1.4rem] font-bold text-brand-teal">Top&nbsp;3</span>
+              <span className="text-sm text-gray-500">Page-One Ranking Gains</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Value props */}
-      <section className="bg-brand-light py-20">
+      {/* ── What we do ───────────────────────────────────────────────── */}
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-3xl font-bold text-brand-navy text-center mb-12">
-            What we do
-          </h2>
+          <div className="mb-14">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-teal mb-3">
+              Our Services
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] max-w-lg leading-tight">
+              Everything your search presence needs to grow
+            </h2>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
+                number: "01",
                 title: "Technical SEO",
                 description:
                   "Deep-crawl audits, Core Web Vitals fixes, schema markup, and ongoing rank tracking so Google rewards your site.",
                 image: "/images/service-seo-audit.webp",
                 alt: "SEO audit illustration",
+                href: "/services",
               },
               {
+                number: "02",
                 title: "Web Development",
                 description:
                   "Fast, accessible Next.js sites and web apps — built to load in under 2 s and convert visitors into clients.",
                 image: "/images/service-web-dev.webp",
                 alt: "Web development illustration",
+                href: "/services/web-development",
               },
               {
+                number: "03",
                 title: "SEO Tooling",
                 description:
                   "Custom dashboards, audit automation, and GSC/GA4 integrations that give you data without the spreadsheet wrangling.",
                 image: "/images/service-seo-tooling.webp",
                 alt: "SEO tooling dashboard illustration",
+                href: "/services",
               },
             ].map((item) => (
-              <div
+              <Link
                 key={item.title}
-                className="rounded-2xl bg-white p-8 shadow-sm border border-gray-100 flex flex-col"
+                href={item.href}
+                className="group rounded-2xl bg-[#F8F7F4] border border-gray-100 p-8 flex flex-col hover:border-brand-teal/30 hover:shadow-lg hover:shadow-teal-900/5 transition-all duration-300"
               >
-                <div className="mb-6 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center h-40">
-                  <Image src={item.image} alt={item.alt} width={160} height={160} className="object-contain h-36 w-36" />
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-[11px] font-semibold tracking-widest text-gray-300">
+                    {item.number}
+                  </span>
+                  <div className="rounded-xl overflow-hidden bg-white flex items-center justify-center h-14 w-14 shadow-sm">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      width={48}
+                      height={48}
+                      className="object-contain h-10 w-10"
+                    />
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-brand-navy mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.description}</p>
-              </div>
+                <h3 className="font-serif text-xl text-[#1A1A1A] mb-3 group-hover:text-brand-teal transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-[15px] text-gray-500 leading-relaxed flex-1">{item.description}</p>
+                <div className="mt-6 text-[13px] font-semibold text-brand-teal flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Learn more
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ── Testimonials ─────────────────────────────────────────────── */}
       <Testimonials testimonials={testimonials} />
 
-      {/* CTA */}
-      <section className="py-20">
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <section className="bg-[#F2EFE9] py-24">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-brand-navy">Ready to grow?</h2>
-          <p className="mt-4 text-gray-600">
-            Tell us about your project and we&apos;ll come back to you within one business day.
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-teal mb-4">
+            Get Started
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] mb-5 leading-tight">
+            Ready to own your search presence?
+          </h2>
+          <p className="text-gray-500 text-[1.0625rem] leading-relaxed mb-10 max-w-xl mx-auto">
+            Tell us about your business and we&apos;ll come back with a clear picture
+            of the opportunity — within one working day, no obligation.
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-600 transition-colors"
+            className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10 text-sm"
           >
-            Get a free consultation
+            Request a free consultation
           </Link>
         </div>
       </section>
