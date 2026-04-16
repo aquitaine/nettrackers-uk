@@ -17,7 +17,11 @@ export function ContactForm() {
     setErrorMsg("");
 
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    // Strip empty strings so optional fields (e.g. unselected service dropdown)
+    // don't fail Zod enum validation — empty string ≠ undefined in Zod
+    const data = Object.fromEntries(
+      Object.entries(Object.fromEntries(new FormData(form))).filter(([, v]) => v !== "")
+    );
 
     try {
       const res = await fetch("/api/contact", {
