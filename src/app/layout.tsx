@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -112,6 +113,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <CookieBanner gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        <Analytics />
       </body>
     </html>
   );
