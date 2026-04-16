@@ -13,8 +13,31 @@ const contactSchema = z.object({
   company: z.string().max(100).optional(),
   service: z.enum(SERVICES).optional(),
   message: z.string().min(10).max(5000),
-  _hp: z.string().optional(), // honeypot
+  "cf-turnstile-response": z.string().min(1, "Bot check token missing"),
 });
+
+// ---------------------------------------------------------------------------
+// Cloudflare Turnstile verification
+// ---------------------------------------------------------------------------
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.warn("[contact] TURNSTILE_SECRET_KEY not set — skipping verification");
+    return true;
+  }
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ secret, response: token, remoteip: ip }),
+  });
+
+  const data = await res.json() as { success: boolean; "error-codes"?: string[] };
+  if (!data.success) {
+    console.warn("[contact] Turnstile rejected:", data["error-codes"]);
+  }
+  return data.success;
+}
 
 // ---------------------------------------------------------------------------
 // Rate limiting (Upstash — no-op when env vars absent)
@@ -22,7 +45,7 @@ const contactSchema = z.object({
 async function checkRateLimit(ip: string): Promise<boolean> {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return true; // no limiter configured → allow
+  if (!url || !token) return true;
 
   const { Ratelimit } = await import("@upstash/ratelimit");
   const { Redis } = await import("@upstash/redis");
@@ -45,6 +68,8 @@ const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "noreply@nettrackers.co.uk"
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+
+  // Rate limit check
   const allowed = await checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
@@ -65,11 +90,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing or invalid fields" }, { status: 422 });
   }
 
-  const { name, email, company, service, message, _hp } = parsed.data;
+  const { name, email, company, service, message } = parsed.data;
+  const turnstileToken = parsed.data["cf-turnstile-response"];
 
-  // Honeypot — bots fill hidden field, humans don't
-  if (_hp) {
-    return NextResponse.json({ ok: true });
+  // Turnstile bot check
+  const human = await verifyTurnstile(turnstileToken, ip);
+  if (!human) {
+    return NextResponse.json({ error: "Bot check failed. Please try again." }, { status: 403 });
   }
 
   console.log("[contact] attempting send → to:", TO_EMAIL, "from:", FROM_EMAIL);
