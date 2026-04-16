@@ -1,6 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import arcjet, { shield, tokenBucket, validateEmail } from "@arcjet/next";
+
+// ---------------------------------------------------------------------------
+// Arcjet — shield + rate limiting + email validation
+// Gracefully disabled when ARCJET_KEY is absent (e.g. local dev)
+// ---------------------------------------------------------------------------
+const aj = process.env.ARCJET_KEY
+  ? arcjet({
+      key: process.env.ARCJET_KEY,
+      rules: [
+        // Block known bad actors, proxies, Tor exit nodes
+        shield({ mode: "LIVE" }),
+        // 5 submissions per IP per hour
+        tokenBucket({ mode: "LIVE", refillRate: 5, interval: 3600, capacity: 5 }),
+        // Reject disposable / invalid email addresses
+        validateEmail({ mode: "LIVE", deny: ["DISPOSABLE", "INVALID", "NO_MX_RECORDS"] }),
+      ],
+    })
+  : null;
 
 // ---------------------------------------------------------------------------
 // Input schema
@@ -32,32 +51,11 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
     body: JSON.stringify({ secret, response: token, remoteip: ip }),
   });
 
-  const data = await res.json() as { success: boolean; "error-codes"?: string[] };
+  const data = (await res.json()) as { success: boolean; "error-codes"?: string[] };
   if (!data.success) {
     console.warn("[contact] Turnstile rejected:", data["error-codes"]);
   }
   return data.success;
-}
-
-// ---------------------------------------------------------------------------
-// Rate limiting (Upstash — no-op when env vars absent)
-// ---------------------------------------------------------------------------
-async function checkRateLimit(ip: string): Promise<boolean> {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return true;
-
-  const { Ratelimit } = await import("@upstash/ratelimit");
-  const { Redis } = await import("@upstash/redis");
-
-  const rl = new Ratelimit({
-    redis: new Redis({ url, token }),
-    limiter: Ratelimit.slidingWindow(5, "1 h"),
-    prefix: "contact",
-  });
-
-  const { success } = await rl.limit(ip);
-  return success;
 }
 
 // ---------------------------------------------------------------------------
@@ -67,17 +65,6 @@ const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@nettrackers.co.uk";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "noreply@nettrackers.co.uk";
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-
-  // Rate limit check
-  const allowed = await checkRateLimit(ip);
-  if (!allowed) {
-    return NextResponse.json(
-      { error: "Too many requests. Please try again later." },
-      { status: 429 }
-    );
-  }
-
   let raw: unknown;
   try {
     raw = await req.json();
@@ -93,7 +80,29 @@ export async function POST(req: NextRequest) {
   const { name, email, company, service, message } = parsed.data;
   const turnstileToken = parsed.data["cf-turnstile-response"];
 
+  // Arcjet: shield + rate limit + email validation
+  if (aj) {
+    const decision = await aj.protect(req, { email, requested: 1 });
+    if (decision.isDenied()) {
+      const reason = decision.reason;
+      if (reason.isRateLimit()) {
+        return NextResponse.json(
+          { error: "Too many requests. Please try again later." },
+          { status: 429 }
+        );
+      }
+      if (reason.isEmail()) {
+        return NextResponse.json(
+          { error: "Please use a valid, non-disposable email address." },
+          { status: 422 }
+        );
+      }
+      return NextResponse.json({ error: "Request blocked." }, { status: 403 });
+    }
+  }
+
   // Turnstile bot check
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const human = await verifyTurnstile(turnstileToken, ip);
   if (!human) {
     return NextResponse.json({ error: "Bot check failed. Please try again." }, { status: 403 });
