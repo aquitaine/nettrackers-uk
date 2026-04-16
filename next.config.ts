@@ -26,11 +26,12 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // Next.js inline scripts + GA4 nonce (GA4 via @next/third-parties uses a script element)
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: https://www.googletagmanager.com",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com",
+      "img-src 'self' data: https://www.googletagmanager.com https://challenges.cloudflare.com",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://challenges.cloudflare.com",
+      "frame-src https://challenges.cloudflare.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
