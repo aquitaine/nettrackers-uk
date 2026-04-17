@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "SEO and web development insights from Bess Damm — practical guides on technical SEO, Core Web Vitals, and building search-optimised websites.",
+    "SEO and web development insights from NetTrackers — practical guides on technical SEO, Core Web Vitals, and building search-optimised websites.",
 };
 
 const POSTS_PER_PAGE = 10;

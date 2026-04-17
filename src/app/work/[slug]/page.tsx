@@ -48,13 +48,13 @@ export default function CaseStudyPage({ params }: Props) {
     datePublished: cs.datePublished,
     author: {
       "@type": "Organization",
-      name: "Bess Damm",
-      url: "https://bessdamm.com",
+      name: "NetTrackers",
+      url: "https://nettrackers.co.uk",
     },
     publisher: {
       "@type": "Organization",
-      name: "Bess Damm",
-      url: "https://bessdamm.com",
+      name: "NetTrackers",
+      url: "https://nettrackers.co.uk",
     },
   };
 

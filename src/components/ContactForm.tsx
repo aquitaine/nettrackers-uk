@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { trackContactFormSubmit } from "@/lib/analytics";
 
 const SERVICES = ["SEO Audit", "SEO Retainer", "Web Development", "Other"] as const;
@@ -10,14 +11,29 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setErrorMsg("Security check not ready yet — please wait a moment and try again.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMsg("");
 
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const raw = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    // Strip empty strings so optional fields don't fail Zod enum validation,
+    // then inject the Turnstile token captured via onSuccess callback
+    const data = {
+      ...Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== "")),
+      "cf-turnstile-response": turnstileToken,
+    };
 
     try {
       const res = await fetch("/api/contact", {
@@ -28,16 +44,23 @@ export function ContactForm() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
+        // Reset Turnstile so user can try again
+        turnstileRef.current?.reset();
         throw new Error(body.error ?? "Something went wrong");
       }
 
       trackContactFormSubmit();
       setStatus("success");
     } catch (err) {
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
       setStatus("error");
     }
   }
+
+  const inputClass =
+    "w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/30";
 
   if (status === "success") {
     return (
@@ -51,21 +74,8 @@ export function ContactForm() {
     );
   }
 
-  const inputClass =
-    "w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/30";
-
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-      {/* Honeypot — hidden from real users, filled by bots */}
-      <input
-        type="text"
-        name="_hp"
-        tabIndex={-1}
-        aria-hidden="true"
-        autoComplete="off"
-        style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px" }}
-      />
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -119,9 +129,7 @@ export function ContactForm() {
             className={`${inputClass} bg-white`}
           >
             {SERVICES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
+              <option key={s} value={s}>{s}</option>
             ))}
           </select>
         </div>
@@ -141,9 +149,20 @@ export function ContactForm() {
         />
       </div>
 
+      {/* tabindex: -1 prevents the hidden Turnstile iframe from stealing tab focus */}
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+        options={{ appearance: "interaction-only", tabindex: -1 }}
+        onSuccess={(token) => setTurnstileToken(token)}
+        onExpire={() => setTurnstileToken(null)}
+        onError={() => setTurnstileToken(null)}
+      />
+
+      {/* Always in DOM so tab order stays stable between textarea and button */}
       <p
         role="alert"
-        className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3 transition-all ${
+        className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3 ${
           status === "error" ? "block" : "hidden"
         }`}
       >

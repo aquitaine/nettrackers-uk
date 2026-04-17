@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Bess Damm privacy policy — how we collect, use, and protect your data.",
+  description: "NetTrackers privacy policy — how we collect, use, and protect your data.",
   robots: { index: true, follow: true },
 };
 
@@ -16,9 +16,9 @@ export default function PrivacyPage() {
       <div className="prose prose-gray max-w-none prose-headings:text-brand-navy prose-a:text-brand-teal prose-a:no-underline hover:prose-a:underline">
         <h2>Who we are</h2>
         <p>
-          Bess Damm is an SEO and programming agency based in London, UK. Our website address is{" "}
-          <a href="https://bessdamm.com">bessdamm.com</a>. You can contact us at{" "}
-          <a href="mailto:hello@bessdamm.com">hello@bessdamm.com</a>.
+          NetTrackers is an SEO and programming agency based in London, UK. Our website address is{" "}
+          <a href="https://nettrackers.co.uk">nettrackers.co.uk</a>. You can contact us at{" "}
+          <a href="mailto:hello@nettrackers.co.uk">hello@nettrackers.co.uk</a>.
         </p>
 
         <h2>What data we collect</h2>
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
         </ul>
         <p>
           To exercise any of these rights, email us at{" "}
-          <a href="mailto:hello@bessdamm.com">hello@bessdamm.com</a>.
+          <a href="mailto:hello@nettrackers.co.uk">hello@nettrackers.co.uk</a>.
         </p>
 
         <h2>Cookies</h2>

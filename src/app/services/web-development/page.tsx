@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 const testimonial = [
   {
     quote:
-      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website Bess Damm built is the best investment we've made in years.",
+      "We went from relying entirely on referrals to getting qualified enquiries through Google every week. The website NetTrackers built is the best investment we've made in years.",
     author: "Managing Partner",
     role: "Boutique Law Firm",
     company: "London",
@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   description:
     "Custom Next.js websites and web apps built for speed, accessibility, and conversions. London web development agency — from landing pages to full product builds.",
   openGraph: {
-    title: "Web Development Services | Bess Damm",
+    title: "Web Development Services | NetTrackers",
     description:
       "Custom Next.js websites and web apps built for speed, accessibility, and conversions.",
-    url: "https://bessdamm.com/services/web-development",
+    url: "https://nettrackers.co.uk/services/web-development",
   },
 };
 
@@ -118,13 +118,13 @@ export default function WebDevelopmentPage() {
     name: "Web Development",
     provider: {
       "@type": "ProfessionalService",
-      name: "Bess Damm",
+      name: "NetTrackers",
       address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
     },
     description:
       "Custom Next.js websites and web apps built for speed, accessibility, and conversions.",
     areaServed: "London",
-    url: "https://bessdamm.com/services/web-development",
+    url: "https://nettrackers.co.uk/services/web-development",
   };
 
   return (
@@ -136,28 +136,29 @@ export default function WebDevelopmentPage() {
       <BreadcrumbJsonLd items={[{ name: "Services", href: "/services" }, { name: "Web Development", href: "/services/web-development" }]} />
 
       {/* Hero */}
-      <section className="bg-brand-navy text-white">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <p className="text-brand-teal font-semibold text-sm uppercase tracking-widest mb-4">
+      <section className="bg-[#f0ece4]">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-teal mb-4">
             Service · Web Development
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight max-w-3xl">
-            Websites that load fast, rank high, and convert visitors
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-[-0.015em] text-[#1a1a1a] max-w-3xl">
+            Websites that load fast, rank high,{" "}
+            <em className="italic font-normal">and convert visitors</em>
           </h1>
-          <p className="mt-6 text-lg text-gray-300 max-w-2xl">
+          <p className="mt-6 text-[17px] text-gray-600 leading-[1.65] max-w-2xl">
             We build custom Next.js sites and web apps with performance and SEO at the core —
             not bolted on at the end. From a focused landing page to a full product build.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               href="/contact"
-              className="rounded-lg bg-brand-teal px-6 py-3 font-semibold text-white hover:bg-teal-600 transition-colors"
+              className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-[15px] font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/15"
             >
               Discuss your project
             </Link>
             <Link
               href="/services"
-              className="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center rounded-lg border border-gray-300 bg-white/80 px-7 py-3.5 text-[15px] font-semibold text-[#1a1a1a] hover:bg-white transition-colors backdrop-blur-sm"
             >
               All services
             </Link>
