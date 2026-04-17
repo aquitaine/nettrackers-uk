@@ -115,9 +115,9 @@ export function ContactForm() {
           <select
             id="service"
             name="service"
+            defaultValue="SEO Audit"
             className={`${inputClass} bg-white`}
           >
-            <option value="">Select a service…</option>
             {SERVICES.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -141,11 +141,14 @@ export function ContactForm() {
         />
       </div>
 
-      {status === "error" && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-          {errorMsg || "Something went wrong. Please try again or email us directly."}
-        </p>
-      )}
+      <p
+        role="alert"
+        className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3 transition-all ${
+          status === "error" ? "block" : "hidden"
+        }`}
+      >
+        {errorMsg || "Something went wrong. Please try again or email us directly."}
+      </p>
 
       <button
         type="submit"
