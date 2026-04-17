@@ -79,6 +79,7 @@ export default function AboutPage() {
                 alt="The NetTrackers team collaborating"
                 width={600}
                 height={450}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="w-full h-auto object-cover"
               />
             </div>
@@ -125,7 +126,7 @@ export default function AboutPage() {
             href="/contact"
             className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10 text-sm"
           >
-            Start a conversation
+            Request a Free Consultation
           </Link>
         </div>
       </section>

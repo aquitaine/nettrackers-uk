@@ -57,6 +57,7 @@ export default function HomePage() {
             src="/images/hero-home.webp"
             alt=""
             fill
+            sizes="100vw"
             className="object-cover object-[center_35%]"
             priority
             aria-hidden="true"
@@ -309,7 +310,7 @@ export default function HomePage() {
             href="/contact"
             className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10 text-sm"
           >
-            Request a free consultation
+            Request a Free Consultation
           </Link>
         </div>
       </section>
