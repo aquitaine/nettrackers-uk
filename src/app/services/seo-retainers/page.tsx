@@ -161,7 +161,7 @@ export default function SeoRetainersPage() {
               href="/contact"
               className="inline-flex items-center rounded-lg bg-brand-teal px-7 py-3.5 text-[15px] font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/15"
             >
-              Get a free consultation
+              Get a Free Consultation
             </Link>
             <Link
               href="/services"
@@ -280,9 +280,9 @@ export default function SeoRetainersPage() {
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-600 transition-colors"
+            className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10 text-sm"
           >
-            Start a conversation
+            Request a Free Consultation
           </Link>
         </div>
       </section>

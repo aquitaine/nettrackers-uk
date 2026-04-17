@@ -101,7 +101,7 @@ export default function ServicesPage() {
               href="/contact"
               className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 text-sm font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10"
             >
-              Talk to us about your project
+              Get a Free Consultation
             </Link>
           </div>
         </div>
