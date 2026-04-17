@@ -153,7 +153,7 @@ export function ContactForm() {
       <Turnstile
         ref={turnstileRef}
         siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-        options={{ appearance: "interaction-only", tabindex: -1 }}
+        options={{ appearance: "interaction-only", tabIndex: -1 }}
         onSuccess={(token) => setTurnstileToken(token)}
         onExpire={() => setTurnstileToken(null)}
         onError={() => setTurnstileToken(null)}
