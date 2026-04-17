@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Script from "next/script";
 import Link from "next/link";
 
@@ -10,6 +10,9 @@ type Consent = "accepted" | "rejected";
 export function CookieBanner({ gaId }: { gaId?: string }) {
   const [consent, setConsent] = useState<Consent | null>(null);
   const [visible, setVisible] = useState(false);
+  const rejectRef = useRef<HTMLButtonElement>(null);
+  const acceptRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY) as Consent | null;
@@ -19,6 +22,42 @@ export function CookieBanner({ gaId }: { gaId?: string }) {
       setVisible(true);
     }
   }, []);
+
+  // Move focus into dialog and mark background inert when visible
+  useEffect(() => {
+    const main = document.getElementById("main-content");
+    if (visible) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      main?.setAttribute("inert", "");
+      rejectRef.current?.focus();
+    } else {
+      main?.removeAttribute("inert");
+      previousFocusRef.current?.focus();
+    }
+  }, [visible]);
+
+  // Trap Tab focus between the two buttons while banner is open
+  useEffect(() => {
+    if (!visible) return;
+    function trap(e: KeyboardEvent) {
+      if (e.key !== "Tab") return;
+      const reject = rejectRef.current;
+      const accept = acceptRef.current;
+      if (e.shiftKey) {
+        if (document.activeElement === reject) {
+          e.preventDefault();
+          accept?.focus();
+        }
+      } else {
+        if (document.activeElement === accept) {
+          e.preventDefault();
+          reject?.focus();
+        }
+      }
+    }
+    document.addEventListener("keydown", trap);
+    return () => document.removeEventListener("keydown", trap);
+  }, [visible]);
 
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
@@ -52,6 +91,7 @@ export function CookieBanner({ gaId }: { gaId?: string }) {
       {visible && (
         <div
           role="dialog"
+          aria-modal="true"
           aria-label="Cookie consent"
           className="fixed bottom-0 left-0 right-0 z-50 bg-brand-navy text-white px-6 py-5 shadow-2xl md:flex md:items-center md:gap-6"
         >
@@ -63,12 +103,14 @@ export function CookieBanner({ gaId }: { gaId?: string }) {
           </p>
           <div className="flex gap-3 shrink-0">
             <button
+              ref={rejectRef}
               onClick={reject}
               className="rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
               Reject
             </button>
             <button
+              ref={acceptRef}
               onClick={accept}
               className="rounded-lg bg-brand-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal-600 transition-colors"
             >
