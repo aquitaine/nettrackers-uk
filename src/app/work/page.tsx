@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Our Work",
   description:
     "Case studies from NetTrackers — real results for London businesses. See how we've grown organic traffic, improved Core Web Vitals, and built websites that convert.",
+  openGraph: {
+    title: "Our Work | NetTrackers",
+    description:
+      "Case studies from NetTrackers — real results for London businesses. See how we've grown organic traffic, improved Core Web Vitals, and built websites that convert.",
+    url: "https://nettrackers.co.uk/work",
+    images: [{ url: "/images/og-default.webp", width: 1200, height: 630, alt: "NetTrackers" }],
+  },
 };
 
 export default function WorkIndexPage() {
@@ -116,9 +123,9 @@ export default function WorkIndexPage() {
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-600 transition-colors"
+            className="inline-flex items-center rounded-lg bg-brand-teal px-8 py-4 font-semibold text-white hover:bg-teal-700 transition-colors shadow-md shadow-teal-900/10 text-sm"
           >
-            Get a free consultation
+            Request a Free Consultation
           </Link>
         </div>
       </section>

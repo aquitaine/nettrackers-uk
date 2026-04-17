@@ -97,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-white text-gray-900 antialiased`}>
         <a
           href="#main-content"

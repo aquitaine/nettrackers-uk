@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "NetTrackers privacy policy — how we collect, use, and protect your data.",
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Privacy Policy | NetTrackers",
+    description: "NetTrackers privacy policy — how we collect, use, and protect your data.",
+    url: "https://nettrackers.co.uk/privacy",
+    images: [{ url: "/images/og-default.webp", width: 1200, height: 630, alt: "NetTrackers" }],
+  },
 };
 
 export default function PrivacyPage() {

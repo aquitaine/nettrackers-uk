@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Insights",
   description:
     "SEO and web development insights from NetTrackers — practical guides on technical SEO, Core Web Vitals, and building search-optimised websites.",
+  openGraph: {
+    title: "Insights | NetTrackers",
+    description:
+      "SEO and web development insights from NetTrackers — practical guides on technical SEO, Core Web Vitals, and building search-optimised websites.",
+    url: "https://nettrackers.co.uk/blog",
+    images: [{ url: "/images/og-default.webp", width: 1200, height: 630, alt: "NetTrackers" }],
+  },
 };
 
 const POSTS_PER_PAGE = 10;
