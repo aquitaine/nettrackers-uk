@@ -40,6 +40,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Allow TURNSTILE_SITE_KEY as an alias for NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  // so both Vercel env var naming conventions work
+  env: {
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY:
+      process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? process.env.TURNSTILE_SITE_KEY ?? "",
+  },
   async headers() {
     return [
       {
